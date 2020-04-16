@@ -1,0 +1,135 @@
+The MiniDafny Programming Language
+======================================================================
+
+Here follows the description of the minimal programming language you
+will be using for your MiniDafny project.  Since annotations need to
+be part of the language (loop invariants, pre and post-conditions),
+the assertion language is also described.
+
+The language description is given in traditional BNF style.  In the
+BNF syntax specification, keywords are written between double quotes
+(such as "while" or "+").  The letter x stands for any variable.
+Variables are sequences of letters, digits, and the symbol
+"_". Variables must not start with a digit.  The letter n stands for
+any integer number.  A BNF description between brackets (e.g. [ Com ])
+denotes arbitrary repetitions of the bracketed contents.  So, [ "no" ]
+will match both the empty string "", and "no no no".
+
+As in the lecture notes, I did not separate program and logical
+variables.  The identifer set that we use to represent variables is
+the same for both program and logical variables.
+
+
+1. EXPRESSIONS
+
+We start the language description with arithmetic expressions.
+
+AExp := n | x
+      | x "[" AExp "]"
+      | "-" AExp
+      | AExp "+" AExp
+      | AExp "-" AExp
+      | AExp "*" AExp
+      | AExp "/" AExp
+      | "(" AEXP ")"
+
+Programs can make use of integer arrays. For example, the expression
+'a[0]' denotes the 0th element of the array 'a'. Array and integer
+variables live in the same (global) namespace. This means that the
+same name 'a' may be used either as an integer variable or as an array
+variable, but not both in the same program.
+
+Notice that there is no way to get the length of an array.  This is
+for the sake of simplicity, we assume arrays to be infinite (in both
+directions).  That is, 'a[-10]' and 'a[10]' always exist and, except
+if specified by a precondition, their value is initially undefined (as
+with integer variables).
+
+The precedence of multiplicative operators is, as usual in
+mathematics, higher than the one of additive operators.  This means
+that the arithmetic expression '3+4*x' is to be interpreted as
+'3+(4*x)'.  The associativity of operators does not matter since we
+are working with unbounded integers.
+
+Program conditions will use boolean expressions. We will find
+conditions in while loops and if statements.
+
+Comp := AExp "==" AExp
+      | AExp "!=" AExp
+      | AExp "<=" AExp
+      | AExp ">=" AExp
+      | AExp "<" AExp
+      | AExp ">" AExp
+
+BExp := Comp
+      | "!" BExp
+      | BExp "&&" BExp
+      | BExp "||" BExp
+      | BExp "==>" BExp
+      | BExp "<=>" BExp
+      | "(" BExp ")"
+
+The precedence of the different boolean operators is described by
+the following table.
+
+  higher | ( )
+         | !
+         | &&
+         | ==>
+  lower  | <=>
+
+The implication operator "==>" is right-associative. All other binary
+boolean operators are left-associative.
+
+2. COMMANDS
+
+Like in any traditional imperative language, commands of the MiniDafny
+language can be chained together to form blocks that will be executed
+in sequence.
+
+Block := Com
+       | "{" [ Com ] "}"
+
+Since the programming language is a tool for verification, we need to
+specify invariants of loops.  Logical assertions are noted Assn in the
+following definition and will be defined in the next section.
+
+Com := x ":=" AExp ";"
+     | x "[" AExp "]" ":=" AExp ";"
+     | "if" "(" BExp ")" Block "else" Block
+     | "if" "(" BExp ")" Block
+     | "while" "(" BExp ")" [ "invariant" Assn ] Block
+
+Because of the syntactic way we treat arrays, the statement 'a := b;'
+cannot be used to copy an array.  However, it is possible to copy a
+slice of an array using a loop and assignments of the form 'a[i] :=
+b[i];'
+
+The second form of 'if' commands is a special case of the first one
+where the else part is an empty block.
+
+A complete program is simply a block that is given a name.  A program
+can have a set of pre and post-conditions which are specified by
+requires and ensures clauses, respectively.
+
+Spec := "requires" Assn
+     |  "ensures" Assn
+
+Prog := "program" x [ Spec ] Block
+
+
+3. ASSERTIONS
+
+Logical assertions are very similar to boolean expressions except that
+they provide first-order quantifiers (quantifiers over variables that
+represent integers).
+
+Assn := Comp
+     | "!" Assn
+     | Assn "||" Assn
+     | Assn "&&" Assn
+     | Assn "==>" Assn
+     | Assn "<=>" Assn
+     | "forall" x [ "," x ] "::" Assn
+     | "exists" x [ "," x ] "::" Assn
+     | "(" Assn ")"

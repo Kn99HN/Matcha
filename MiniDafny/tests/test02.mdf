@@ -1,0 +1,11 @@
+program test02
+  requires x == 0
+  ensures x == 10
+{
+  while (x < 10)
+    invariant 0 <= x
+    invariant x <= 10
+  {
+    x := x + 1;
+  }
+}

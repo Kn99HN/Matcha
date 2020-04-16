@@ -1,0 +1,6 @@
+program test01
+  requires x > 0
+  ensures y == x + x
+{
+  if (x > -2) y := 2 * x;
+}

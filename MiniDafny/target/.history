@@ -1,0 +1,42 @@
+run test/test01.mdf
+run test/test01.mdf -d
+run test/test02.mdf -d
+run test/test02.mdf 
+git pull
+compile
+test
+run test/test03.mdf 
+run test/test02.mdf 
+run test/test03.mdf 
+run test/test03.mdf -d
+run test/test02.mdf -d
+run test/test03.mdf -d
+run test/test01.mdf -d
+run test/test04.mdf -d
+run test/test03.mdf -d
+run test/test02.mdf -d
+run test/test01.mdf -d
+run test/test04.mdf -d
+test
+compile
+test
+run tests/test01.mdf -d
+run tests/test01.mdf 
+run tests/test01.mdf -d
+run tests/test02.mdf -d
+run tests/test03.mdf -d
+run tests/test04.mdf -d
+run tests/test05.mdf -d
+run tests/test04.mdf -d
+run tests/test04.mdf -h
+run tests/test04.mdf -d
+run tests/test04.mdf 
+clean
+compile
+run 
+run tests/test01.mdf
+run tests/test01.mdf -d
+test
+run tests/test05.mdf
+run tests/test05.mdf -d
+clean

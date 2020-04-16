@@ -1,0 +1,13 @@
+program test03
+  requires x >= 0
+  ensures y == x * x
+{
+  y := 0;
+  z := 0;
+  while (z < x)
+    //invariant true
+  {
+    y := y + z + z + 1;
+    z := z + 1;
+  }
+}
