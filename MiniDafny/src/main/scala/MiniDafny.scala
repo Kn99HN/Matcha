@@ -3,7 +3,6 @@ object MiniDafny extends md.util.MDApp {
   import md.util._
   import md.analysis._
   import scala.util.parsing.input.NoPosition
-   
   
   /* Interface to run your verifier from the command line. */ 
   
@@ -15,8 +14,9 @@ object MiniDafny extends md.util.MDApp {
     val prog = handle(fail()) {
       parse.fromFile(file)
     }
-      
     if (debug) {
+      // println(VC.genCond(prog))
+      println(prog)
       println("Parsed program:\n")
       println(prog.pretty)
     }  
