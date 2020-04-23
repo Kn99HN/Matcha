@@ -9,6 +9,7 @@ class SolverSuite extends FunSuite {
   val x = Variable("x").setType(Int)
   val y = Variable("y").setType(Int)
   val z = Variable("z").setType(Int)
+  val t = IntLit(2).setType(Int)
 
   val Array = new UnInterpreted("intarray")
   
@@ -30,10 +31,7 @@ class SolverSuite extends FunSuite {
     val form2 = 
       And(Lt(IntLit(0), Plus(x, y)), Eq(IntLit(0), x), Leq(y, IntLit(0)))
     assert(!solver.testB(form2), "unsat formula")
-    
-    val form4 = 
-      Implies(Lt(IntLit(0), x), Lt(IntLit(-2),x))
-    assert(solver.testB(form2), "sat formula")
+
     // Array select/update axioms
     val arrayAx1 =
       ForAll(List(a, x, y, z), Implies(Eq(x, z), Eq(select(update(a, x, y), z), y)))

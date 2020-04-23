@@ -1,9 +1,9 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/parser.scala:16:26: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/parser.scala:38:26: match may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: BConst(_), BinOp(_, _, _), Binder(_, _, _), Select(_, _), UnOp(_, _), Update(_, _, _), Var(_)[0m
 [0m[[0m[33mwarn[0m] [0m[0m                        (e) match {[0m
 [0m[[0m[33mwarn[0m] [0m[0m                         ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/parser.scala:8:10: match may not be exhaustive.[0m
-[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: BinOp(_, _, _), Binder(_, _, _), Select(_, _), Update(_, _, _)[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/parser.scala:30:10: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: Binder(_, _, _), Select(_, _), Update(_, _, _)[0m
 [0m[[0m[33mwarn[0m] [0m[0m        (expr) match {[0m
 [0m[[0m[33mwarn[0m] [0m[0m         ^[0m
 [0m[[0m[33mwarn[0m] [0m[0mtwo warnings found[0m

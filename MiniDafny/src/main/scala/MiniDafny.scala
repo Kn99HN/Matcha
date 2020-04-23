@@ -3,6 +3,7 @@ object MiniDafny extends md.util.MDApp {
   import md.util._
   import md.analysis._
   import scala.util.parsing.input.NoPosition
+  import dzufferey.smtlib._
 
   def True: Expr = BConst(true)
   
@@ -19,8 +20,13 @@ object MiniDafny extends md.util.MDApp {
     if (debug) {
       // var list = GC.genCondProg(prog)
       // for(comm <- list) println(comm.pretty)
-      var coms = GC.genCondProg(prog)
-      println(WP.computeWP(coms, True))
+      // val solver = Z3(UFLIA)
+
+      // var coms = GC.genCondProg(prog)
+      // var wps = WP.computeWP(coms, True)
+      // var form = parser.parse(wps)
+      // println(solver.testB(form))
+      // println(WP.computeWP(coms, True))
       println("Parsed program:\n")
       println(prog.pretty)
     }  

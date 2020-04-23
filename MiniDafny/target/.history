@@ -99,3 +99,8 @@ test
 run -d tests/test01.mdf
 test
 run -d tests/test01.mdf
+test
+run -d tests/test01.mdf
+clear
+reload
+run -d tests/test01.mdf
