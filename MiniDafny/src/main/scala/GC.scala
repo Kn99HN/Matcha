@@ -2,7 +2,6 @@ object GC {
     import md.ast._
     import scala.collection.mutable.ListBuffer
 
-    // //@ToDo: Convert to list of appropriate types
     var list = new ListBuffer[Com]()
     var frehsMap:Map[String,Int] = Map()
     var modVars = new ListBuffer[String]()
@@ -10,6 +9,7 @@ object GC {
     def True: Expr = BConst(true)
     def False: Expr = BConst(false) 
 
+    //Computing the verification condition for a program
     def genCondProg(prog : Program) : Com = 
         (prog) match {
             case (_) =>

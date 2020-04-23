@@ -4,6 +4,7 @@ object WP {
     //map for freshvariables
     var frehsMap:Map[String,Int] = Map()
 
+    //computing weakest preconditions
     def computeWP(com : Com, expr : Expr) : Expr =
         (com) match {
             case(Assume (b)) => return BinOp(Impl, b, expr)
@@ -30,6 +31,7 @@ object WP {
         return curr + 'a' + freshIdx.toString()
     }
 
+    //replace current variable with a fresh one in the expression in question
     def replaceExpression(curr: String, fresh: String, expr: Expr) : Expr = 
         (expr) match {
             case (Var (name)) => 

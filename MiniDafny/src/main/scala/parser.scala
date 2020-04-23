@@ -33,6 +33,7 @@ object parser{
     val select = new UnInterpretedFct("select", Some(Array ~> Int ~> Int))
     val update = new UnInterpretedFct("update", Some(Array ~> Int ~> Int ~> Array))
 
+    //parse into Z3 Language using SMT-LIB interface
     def parse(expr : Expr) : Formula =
         (expr) match {
             case (AConst (x)) => return (IntLit(x))
@@ -52,7 +53,13 @@ object parser{
                     case MyPlus => return SMTPlus(parse(e1).setType(Int), parse(e2).setType(Int))
                     case MyMinus => return SMTMinus(parse(e1).setType(Int), parse(e2).setType(Int))
                     case MyTimes => return SMTTimes(parse(e1).setType(Int), parse(e2).setType(Int))
-                    case Div => return Divides(parse(e1).setType(Int), parse(e2).setType(Int))
+                    case Div => 
+                        var denom = parse(e2).setType(Int)
+                        (denom) match {
+                            case (IntLit (x)) => 
+                                if(x == 0) throw new Exception("Runtime Error. Cannot divide by 0")
+                                else return Divides(parse(e1).setType(Int), parse(e2).setType(Int))
+                        }
 
                     //comparison
                     case MyEq => return SMTEq(parse(e1).setType(Int), parse(e2).setType(Int))
@@ -84,7 +91,7 @@ object parser{
 
     def convertList(list : List[String]) : List[Variable] = {
         var output = new ListBuffer[Variable]()
-        for(str <- list) output += Variable(str)
+        for(str <- list) output += Variable(str).setType(Int)
         return output.toList
     }
 }

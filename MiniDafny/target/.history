@@ -122,3 +122,23 @@ run -d tests/myTest.mdf
 run -d tests/myTest
 run -d tests/myTest.mdf
 run -d tests/test04.mdf
+test
+run -d tests/test04.mdf
+run -d tests/test03.mdf
+clear
+reload
+run -d tests/test02.mdf
+reload
+run -d tests/test05.mdf
+run -d tests/test04.mdf
+run -d tests/myTest.mdf
+run -d tests/test01.mdf
+reload
+run -d tests/myTEst.mdf
+run -d tests/myTest.mdf
+run -d tests/test4.mdf
+run -d tests/test04.mdf
+run -d tests/test01.mdf
+run -d tests/test04.mdf
+clear
+run -d tests/test04.mdf
