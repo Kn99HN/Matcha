@@ -4,6 +4,7 @@ object MiniDafny extends md.util.MDApp {
   import md.analysis._
   import scala.util.parsing.input.NoPosition
   import dzufferey.smtlib._
+  import org.scalatest._
 
   def True: Expr = BConst(true)
   
@@ -18,15 +19,6 @@ object MiniDafny extends md.util.MDApp {
       parse.fromFile(file)
     }
     if (debug) {
-      // var list = GC.genCondProg(prog)
-      // for(comm <- list) println(comm.pretty)
-      // val solver = Z3(UFLIA)
-
-      // var coms = GC.genCondProg(prog)
-      // var wps = WP.computeWP(coms, True)
-      // var form = parser.parse(wps)
-      // println(solver.testB(form))
-      // println(WP.computeWP(coms, True))
       println("Parsed program:\n")
       println(prog.pretty)
     }  
@@ -37,11 +29,4 @@ object MiniDafny extends md.util.MDApp {
    
     
   }
-
-  // def test(prog : Com) : Unit = 
-  //   (prog) match {
-  //     case While (b, inv, c) =>
-  //         var tmp = VC.findModifiedVariables(c)
-  //         println(VC.convertModVars(tmp.toList))
-  //   }
 } 

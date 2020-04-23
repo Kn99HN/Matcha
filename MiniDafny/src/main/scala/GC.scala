@@ -51,26 +51,12 @@ object GC {
                 var havocs = convertModVars(modVars.toList) //convert using array of modified variables
                 Seq(
                     Assert (inv),
-                    Seq(
-                        havocs,
-                        Seq(
-                            Assume (inv),
-                            Choice(
-                                Seq(
-                                    Assume (b),
-                                    Seq (
-                                        genCondBody(c),
-                                        Seq(
-                                            Assert (inv),
-                                            Assume (False)
-                                        )
-
-                                    )
-                                ),
-                                Assume (UnOp(Not, b))
-                            )
-                        )
-                    )
+                    Seq(havocs, 
+                    Seq(Assume (inv), Choice(
+                        Seq(Assume (b),
+                        Seq (genCondBody(c),
+                        Seq(Assert (inv),Assume (False)))),
+                        Assume (UnOp(Not, b)))))
                 )
             case (_) => comm
         }

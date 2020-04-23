@@ -1,4 +1,5 @@
 object parser{
+    import scala.collection.mutable.ListBuffer
     import org.scalatest._
     import dzufferey.smtlib._
     import dzufferey.smtlib.{
@@ -10,7 +11,8 @@ object parser{
         Lt => SMTLt,
         Gt => SMTGt,
         And => SMTAnd,
-        Or => SMTOr
+        Or => SMTOr,
+        Exists => SMTExists
         }
     import md.ast._
     import md.ast.{
@@ -23,9 +25,14 @@ object parser{
         Lt => MyLt,
         Gt => MyGt,
         And => MyAnd,
-        Or => MyOr
+        Or => MyOr,
+        Exists => MyExists
         }
-        
+    
+    val Array = new UnInterpreted("intarray")
+    val select = new UnInterpretedFct("select", Some(Array ~> Int ~> Int))
+    val update = new UnInterpretedFct("update", Some(Array ~> Int ~> Int ~> Array))
+
     def parse(expr : Expr) : Formula =
         (expr) match {
             case (AConst (x)) => return (IntLit(x))
@@ -62,7 +69,22 @@ object parser{
                         return SMTAnd(Implies(parse(e1), parse(e2)), Implies(parse(e2), parse(e1)))
 
                 }
-            
+            case (Select (name, e)) =>
+                return(select(Variable(name).setType(Array), parse(e)))
+            case(Update (name, i, ei)) =>
+                return (update(Variable(name).setType(Array), parse(i), parse(ei)))
+            case (Binder (b, xs, e)) =>
+                (b) match {
+                    case Forall => 
+                        ForAll(convertList(xs), parse(e))
+                    case MyExists => SMTExists(convertList(xs), parse(e))
+                }
 
         }
+
+    def convertList(list : List[String]) : List[Variable] = {
+        var output = new ListBuffer[Variable]()
+        for(str <- list) output += Variable(str)
+        return output.toList
+    }
 }

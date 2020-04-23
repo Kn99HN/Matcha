@@ -1,4 +1,4 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/test/scala/SolverSuite.scala:26:11: value += is not a member of dzufferey.smtlib.Formula[0m
-[0m[[0m[31merror[0m] [0m[0m    form1 += 1[0m
-[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/test/scala/SolverSuite.scala:33:5: not found: value printFormula[0m
+[0m[[0m[31merror[0m] [0m[0m    printFormula(form2)[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m

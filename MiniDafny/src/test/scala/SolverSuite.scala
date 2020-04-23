@@ -27,7 +27,7 @@ class SolverSuite extends FunSuite {
     
     assert( solver.testB(form1), "sat formula")
     
-    // check validity of 0 < x + y && x == 0 ==> 0 < y
+    // check validity of 0 < x + y && x == 0 ==> 0 <= y
     val form2 = 
       And(Lt(IntLit(0), Plus(x, y)), Eq(IntLit(0), x), Leq(y, IntLit(0)))
     assert(!solver.testB(form2), "unsat formula")

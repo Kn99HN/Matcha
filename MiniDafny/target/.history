@@ -104,3 +104,21 @@ run -d tests/test01.mdf
 clear
 reload
 run -d tests/test01.mdf
+run -d tests/test02.mdf
+reload
+run -d tests/test03.mdf
+reload
+run -d tests/test03.mdf
+run -d tests/test01.mdf
+reload
+run -d tests/test01.mdf
+clear
+reload
+run -d tests/test01.mdf
+test
+run -d tests/test04.mdf
+run -d tests/myTest
+run -d tests/myTest.mdf
+run -d tests/myTest
+run -d tests/myTest.mdf
+run -d tests/test04.mdf
