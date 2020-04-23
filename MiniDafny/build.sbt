@@ -10,10 +10,12 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % 
 
 libraryDependencies += "com.googlecode.kiama" % "kiama_2.11" % "1.8.0"
 
-//libraryDependencies += "com.regblanc" %% "scala-smtlib" % "0.2"
+libraryDependencies += "com.regblanc" %% "scala-smtlib" % "0.2"
 
-resolvers +=  "dzufferey maven repo" at "https://github.com/dzufferey/my_mvn_repo/raw/master/repository"
+// resolvers +=  "dzufferey maven repo" at "https://github.com/dzufferey/my_mvn_repo/raw/master/repository"
 
-libraryDependencies += "io.github.dzufferey" %% "scala-smtlib-interface" % "0.1-SNAPSHOT"
+// libraryDependencies += "com.regblanc" %% "scala-smtlib" % "0.2.2"
 
 parallelExecution in Test := false
+
+

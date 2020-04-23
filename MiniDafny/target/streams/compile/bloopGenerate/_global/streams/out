@@ -1,0 +1,4 @@
+[debug] [minidafny] Classpath dependencies List()
+[debug] [minidafny] Dependencies from configurations List()
+[debug] Bloop wrote the configuration of project 'minidafny' to '/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/.bloop/minidafny.json'
+[success] Generated .bloop/minidafny.json

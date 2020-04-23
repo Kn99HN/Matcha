@@ -23,6 +23,7 @@ class SolverSuite extends FunSuite {
 
     // a simple test on a propositional formula
     val form1 = And(p, Or(Not(p), q))
+    
     assert( solver.testB(form1), "sat formula")
     
     // check validity of 0 < x + y && x == 0 ==> 0 < y
@@ -30,6 +31,9 @@ class SolverSuite extends FunSuite {
       And(Lt(IntLit(0), Plus(x, y)), Eq(IntLit(0), x), Leq(y, IntLit(0)))
     assert(!solver.testB(form2), "unsat formula")
     
+    val form4 = 
+      Implies(Lt(IntLit(0), x), Lt(IntLit(-2),x))
+    assert(solver.testB(form2), "sat formula")
     // Array select/update axioms
     val arrayAx1 =
       ForAll(List(a, x, y, z), Implies(Eq(x, z), Eq(select(update(a, x, y), z), y)))

@@ -40,3 +40,62 @@ test
 run tests/test05.mdf
 run tests/test05.mdf -d
 clean
+run test/test01.mdf
+pip install scala
+run test/test01.mdf
+run tests/test01.mdf
+run tests/test02.mdf
+bt
+run tests/test01.mdf
+clear
+:r
+r
+run -d tests/test01.mdf
+clear
+run -d tests/test01.mdf
+run tests/test01.mdf --d
+run --d tests/test01.mdf
+run -d tests/test01.mdf
+clear
+run -d tests/test01.mdf
+:r
+:l
+clear
+sbt
+help
+reload
+sbt
+run -d tests/test01.mdf
+reload
+run -d tests/test01.mdf
+reload
+run -d tests/test01.mdf
+reload
+run -d tests/test01.mdf
+reload
+run -d tests/test01.mdf
+clear
+run -d tests/test01.mdf
+var x = 1
+var x = 1;
+var t = 1
+run -d tests/test01.mdf
+run -d tests/test01
+run -d tests/test01.df
+run -d tests/test01.mdf
+run -d tests/test02.mdf
+run -d tests/test01.mdf
+run -d tests/test02.mdf
+run -d tests/test01.mdf
+run -d tests/test02.mdf
+run -d tests/test01.mdf
+reload
+run -d tests/test01.mdf
+test
+reload
+test
+reload
+test
+run -d tests/test01.mdf
+test
+run -d tests/test01.mdf

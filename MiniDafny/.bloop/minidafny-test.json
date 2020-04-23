@@ -1,0 +1,371 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "minidafny-test",
+        "directory": "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny",
+        "workspaceDir": "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny",
+        "sources": [
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/test/scala-2.11",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/test/scala",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/test/java",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/target/scala-2.11/src_managed/test"
+        ],
+        "dependencies": [
+            "minidafny"
+        ],
+        "classpath": [
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/.bloop/minidafny/scala-2.11/classes",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/lib/misc-scala-utils_2.11-0.1-SNAPSHOT.jar",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/lib/scala-parser-combinators_2.11-1.0.4.jar",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/lib/scala-smtlib_2.11-0.2.jar",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/lib/kiama_2.11-1.8.0.jar",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/lib/scala-smtlib-interface_2.11-0.1-SNAPSHOT.jar",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/lib/scalatest_2.11-2.2.4.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/googlecode/kiama/kiama_2.11/1.8.0/kiama_2.11-1.8.0.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/regblanc/scala-smtlib_2.11/0.2.2/scala-smtlib_2.11-0.2.2.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalatest/scalatest_2.11/2.2.4/scalatest_2.11-2.2.4.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/2.0.3/jsr305-2.0.3.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/guava/17.0/guava-17.0.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bitbucket/inkytonik/dsinfo/dsinfo_2.11/0.4.0/dsinfo_2.11-0.4.0.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bitbucket/inkytonik/dsprofile/dsprofile_2.11/0.4.0/dsprofile_2.11-0.4.0.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/rogach/scallop_2.11/0.9.5/scallop_2.11-0.9.5.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/jline/jline/2.12/jline-2.12.jar",
+            "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar"
+        ],
+        "out": "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/.bloop/minidafny",
+        "classesDir": "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/.bloop/minidafny/scala-2.11/test-classes",
+        "resources": [
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/test/resources",
+            "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/target/scala-2.11/resource_managed/test"
+        ],
+        "scala": {
+            "organization": "org.scala-lang",
+            "name": "scala-compiler",
+            "version": "2.11.8",
+            "options": [
+                
+            ],
+            "jars": [
+                "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.8/scala-compiler-2.11.8.jar",
+                "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar",
+                "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8.jar",
+                "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.4/scala-xml_2.11-1.0.4.jar",
+                "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.jar",
+                "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.jar"
+            ],
+            "analysis": "/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/target/streams/test/bloopAnalysisOut/_global/streams/inc_compile_2.11.zip",
+            "setup": {
+                "order": "mixed",
+                "addLibraryToBootClasspath": true,
+                "addCompilerToClasspath": false,
+                "addExtraJarsToClasspath": false,
+                "manageBootClasspath": true,
+                "filterLibraryFromClasspath": true
+            }
+        },
+        "java": {
+            "options": [
+                
+            ]
+        },
+        "test": {
+            "frameworks": [
+                {
+                    "names": [
+                        "org.scalacheck.ScalaCheckFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs2.runner.Specs2Framework",
+                        "org.specs2.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalatest.tools.Framework",
+                        "org.scalatest.tools.ScalaTestFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "com.novocode.junit.JUnitFramework"
+                    ]
+                }
+            ],
+            "options": {
+                "excludes": [
+                    
+                ],
+                "arguments": [
+                    
+                ]
+            }
+        },
+        "platform": {
+            "name": "jvm",
+            "config": {
+                "home": "/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre",
+                "options": [
+                    "-Duser.dir=/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny"
+                ]
+            },
+            "mainClass": [
+                
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.11.8",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-parser-combinators_2.11",
+                    "version": "1.0.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-parser-combinators_2.11",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.jar"
+                        },
+                        {
+                            "name": "scala-parser-combinators_2.11",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.googlecode.kiama",
+                    "name": "kiama_2.11",
+                    "version": "1.8.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "kiama_2.11",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/googlecode/kiama/kiama_2.11/1.8.0/kiama_2.11-1.8.0.jar"
+                        },
+                        {
+                            "name": "kiama_2.11",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/googlecode/kiama/kiama_2.11/1.8.0/kiama_2.11-1.8.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.regblanc",
+                    "name": "scala-smtlib_2.11",
+                    "version": "0.2.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-smtlib_2.11",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/regblanc/scala-smtlib_2.11/0.2.2/scala-smtlib_2.11-0.2.2.jar"
+                        },
+                        {
+                            "name": "scala-smtlib_2.11",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/regblanc/scala-smtlib_2.11/0.2.2/scala-smtlib_2.11-0.2.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scalatest",
+                    "name": "scalatest_2.11",
+                    "version": "2.2.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scalatest_2.11",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalatest/scalatest_2.11/2.2.4/scalatest_2.11-2.2.4.jar"
+                        },
+                        {
+                            "name": "scalatest_2.11",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalatest/scalatest_2.11/2.2.4/scalatest_2.11-2.2.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.code.findbugs",
+                    "name": "jsr305",
+                    "version": "2.0.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jsr305",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/2.0.3/jsr305-2.0.3.jar"
+                        },
+                        {
+                            "name": "jsr305",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/2.0.3/jsr305-2.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.guava",
+                    "name": "guava",
+                    "version": "17.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "guava",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/guava/17.0/guava-17.0.jar"
+                        },
+                        {
+                            "name": "guava",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/guava/17.0/guava-17.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.bitbucket.inkytonik.dsinfo",
+                    "name": "dsinfo_2.11",
+                    "version": "0.4.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "dsinfo_2.11",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bitbucket/inkytonik/dsinfo/dsinfo_2.11/0.4.0/dsinfo_2.11-0.4.0.jar"
+                        },
+                        {
+                            "name": "dsinfo_2.11",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bitbucket/inkytonik/dsinfo/dsinfo_2.11/0.4.0/dsinfo_2.11-0.4.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.bitbucket.inkytonik.dsprofile",
+                    "name": "dsprofile_2.11",
+                    "version": "0.4.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "dsprofile_2.11",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bitbucket/inkytonik/dsprofile/dsprofile_2.11/0.4.0/dsprofile_2.11-0.4.0.jar"
+                        },
+                        {
+                            "name": "dsprofile_2.11",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bitbucket/inkytonik/dsprofile/dsprofile_2.11/0.4.0/dsprofile_2.11-0.4.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.rogach",
+                    "name": "scallop_2.11",
+                    "version": "0.9.5",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scallop_2.11",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/rogach/scallop_2.11/0.9.5/scallop_2.11-0.9.5.jar"
+                        },
+                        {
+                            "name": "scallop_2.11",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/rogach/scallop_2.11/0.9.5/scallop_2.11-0.9.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-reflect",
+                    "version": "2.11.8",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-reflect",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8.jar"
+                        },
+                        {
+                            "name": "scala-reflect",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "jline",
+                    "name": "jline",
+                    "version": "2.12",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jline",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/jline/jline/2.12/jline-2.12.jar"
+                        },
+                        {
+                            "name": "jline",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/jline/jline/2.12/jline-2.12-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-xml_2.11",
+                    "version": "1.0.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-xml_2.11",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2.jar"
+                        },
+                        {
+                            "name": "scala-xml_2.11",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.2/scala-xml_2.11-1.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.11.8",
+                    "configurations": "optional",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "/Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "test"
+        ]
+    }
+}

@@ -1,0 +1,3 @@
+[debug] "not up to date. inChanged = true, force = false
+[debug] Updating ProjectRef(uri("file:/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/"), "minidafny")...
+[debug] Done updating ProjectRef(uri("file:/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/"), "minidafny")

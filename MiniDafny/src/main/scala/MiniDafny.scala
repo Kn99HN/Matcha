@@ -3,6 +3,8 @@ object MiniDafny extends md.util.MDApp {
   import md.util._
   import md.analysis._
   import scala.util.parsing.input.NoPosition
+
+  def True: Expr = BConst(true)
   
   /* Interface to run your verifier from the command line. */ 
   
@@ -15,8 +17,10 @@ object MiniDafny extends md.util.MDApp {
       parse.fromFile(file)
     }
     if (debug) {
-      // println(VC.genCond(prog))
-      println(prog)
+      // var list = GC.genCondProg(prog)
+      // for(comm <- list) println(comm.pretty)
+      var coms = GC.genCondProg(prog)
+      println(WP.computeWP(coms, True))
       println("Parsed program:\n")
       println(prog.pretty)
     }  
@@ -27,4 +31,11 @@ object MiniDafny extends md.util.MDApp {
    
     
   }
-}
+
+  // def test(prog : Com) : Unit = 
+  //   (prog) match {
+  //     case While (b, inv, c) =>
+  //         var tmp = VC.findModifiedVariables(c)
+  //         println(VC.convertModVars(tmp.toList))
+  //   }
+} 

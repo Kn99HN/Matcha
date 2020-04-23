@@ -1,0 +1,738 @@
+INFO  started: Metals version 0.8.4 in workspace '/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny'
+INFO  time: initialize in 0.48s
+WARN  no build target for: /Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/VC.scala
+WARN  no build target for: /Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/md/ast/ast.scala
+WARN  no build target for: /Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/MiniDafny.scala
+INFO  running '/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/metals787211236783478170/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'
+INFO  skipping build import with status 'Started'
+INFO  [info] Loading settings for project minidafny-build from metals.sbt ...
+INFO  [info] Loading project definition from /Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/project
+INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
+INFO  [info] Loading settings for project minidafny from build.sbt ...
+INFO  [info] Set current project to minidafny (in build file:/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/)
+INFO  [success] Generated .bloop/minidafny-test.json
+INFO  [success] Generated .bloop/minidafny.json
+INFO  [success] Total time: 1 s, completed Apr 22, 2020 3:07:58 PM
+INFO  build tool exit: 0
+INFO  time: ran 'sbt bloopInstall' in 15s
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher7497373760972383252/bsp.socket'...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+Waiting for the bsp connection to come up...
+No server running at 127.0.0.1:8212, let's fire one...
+Resolving ch.epfl.scala:bloop-frontend_2.12:1.4.0-RC1-190-ef7d8dba...
+Starting bloop server at 127.0.0.1:8212...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+Attempting a connection to the server...
+[0m[32m[D][0m Loading 2 projects from '/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/.bloop'...
+[0m[32m[D][0m Loading project from '/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/.bloop/minidafny.json'
+[0m[32m[D][0m Loading project from '/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/.bloop/minidafny-test.json'
+[0m[32m[D][0m Cache miss for scala instance org.scala-lang:scala-compiler:2.11.8.
+[0m[32m[D][0m   => /Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/jline/jline/2.12.1/jline-2.12.1.jar
+[0m[32m[D][0m   => /Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.jar
+[0m[32m[D][0m   => /Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.4/scala-xml_2.11-1.0.4.jar
+[0m[32m[D][0m   => /Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.11.8/scala-compiler-2.11.8.jar
+[0m[32m[D][0m   => /Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar
+[0m[32m[D][0m   => /Users/khanhnguyen/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8.jar
+[0m[32m[D][0m Missing analysis file for project 'minidafny'
+[0m[32m[D][0m Missing analysis file for project 'minidafny-test'
+[0m[32m[D][0m Waiting for a connection at local:///var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher7497373760972383252/bsp.socket...
+The server is listening for incoming connections at local:///var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher7497373760972383252/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/khanhnguyen/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  time: connected to build server in 4.26s
+INFO  Connected to Build server v1.4.0-RC1-190-ef7d8dba
+WARN  unsupported Scala 2.11.8
+INFO  time: indexed workspace in 3.58s
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 1.64s
+WARN  unsupported Scala 2.11.8
+INFO  disconnected: build server
+No more data in the client stdin, exiting...
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher1964037160793989345/bsp.socket'...
+Waiting for the bsp connection to come up...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher1964037160793989345/bsp.socket...
+The server is listening for incoming connections at local:///var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher1964037160793989345/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/khanhnguyen/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  Connected to Build server v1.4.0-RC1-190-ef7d8dba
+INFO  time: indexed workspace in 0.5s
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 0.2s
+INFO  running '/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/metals7565663932897692206/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'
+INFO  disconnected: build server
+No more data in the client stdin, exiting...
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher1553137137833088554/bsp.socket'...
+Waiting for the bsp connection to come up...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher1553137137833088554/bsp.socket...
+The server is listening for incoming connections at local:///var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher1553137137833088554/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/khanhnguyen/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  Connected to Build server v1.4.0-RC1-190-ef7d8dba
+INFO  time: indexed workspace in 0.59s
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 0.15s
+INFO  [info] Loading settings for project minidafny-build from metals.sbt ...
+INFO  [info] Loading project definition from /Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/project
+INFO  user cancelled build import
+INFO  time: ran 'sbt bloopInstall' in 5.64s
+INFO  2020-04-22 15:09:12,774 shutdown-hooks-run-all ERROR No Log4j 2 configuration file found. Using default configuration (logging only errors to the console), or user programmatically provided configurations. Set system property 'log4j2.debug' to show Log4j 2 internal initialization logging. See https://logging.apache.org/log4j/2.x/manual/configuration.html for instructions on how to configure Log4j 2
+INFO  build tool exit: 143
+WARN  unsupported Scala 2.11.8
+INFO  disconnected: build server
+No more data in the client stdin, exiting...
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher5893741244209642152/bsp.socket'...
+Waiting for the bsp connection to come up...
+No more data in the server stdin, exiting...
+No more data in the server stdin, exiting...
+[0m[32m[D][0m Loading workspace settings from bloop.settings.json
+[0m[32m[D][0m Waiting for a connection at local:///var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher5893741244209642152/bsp.socket...
+The server is listening for incoming connections at local:///var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher5893741244209642152/bsp.socket...
+Starting thread that pumps stdin and redirects it to the bsp server...
+Starting thread that pumps server stdout and redirects it to the client stdout...
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/khanhnguyen/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  Connected to Build server v1.4.0-RC1-190-ef7d8dba
+INFO  time: indexed workspace in 0.38s
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  disconnected: build server
+INFO  time: compiled minidafny in 0.14s
+No more data in the client stdin, exiting...
+Starting the bsp launcher for bloop...
+Opening a bsp server connection with 'bsp --protocol local --socket /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/bsp-launcher6705950058488339867/bsp.socket'...
+Waiting for the bsp connection to come up...
+ERROR Failed to connect with build server, no functionality will work.
+java.util.concurrent.ExecutionException: Boxed InterruptedException
+	at scala.concurrent.impl.Promise$.resolver(Promise.scala:86)
+	at scala.concurrent.impl.Promise$.scala$concurrent$impl$Promise$$resolveTry(Promise.scala:79)
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:284)
+	at scala.concurrent.Promise.complete(Promise.scala:53)
+	at scala.concurrent.Promise.complete$(Promise.scala:52)
+	at scala.concurrent.impl.Promise$DefaultPromise.complete(Promise.scala:187)
+	at scala.concurrent.java8.FuturesConvertersImpl$P.accept(FutureConvertersImpl.scala:100)
+	at scala.concurrent.java8.FuturesConvertersImpl$P.accept(FutureConvertersImpl.scala:97)
+	at java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:760)
+	at java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:736)
+	at java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:474)
+	at java.util.concurrent.CompletableFuture.completeExceptionally(CompletableFuture.java:1977)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$register$3(BuildServerConnection.scala:145)
+	at scala.runtime.java8.JFunction0$mcZ$sp.apply(JFunction0$mcZ$sp.java:23)
+	at scala.util.Try$.apply(Try.scala:213)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$register$2(BuildServerConnection.scala:145)
+	at scala.meta.internal.metals.Cancelable$$anon$1.cancel(Cancelable.scala:17)
+	at scala.meta.internal.metals.Cancelable$.$anonfun$cancelAll$1(Cancelable.scala:28)
+	at scala.collection.immutable.List.foreach(List.scala:392)
+	at scala.meta.internal.metals.Cancelable$.cancelAll(Cancelable.scala:27)
+	at scala.meta.internal.metals.MutableCancelable.cancel(MutableCancelable.scala:18)
+	at scala.meta.internal.metals.BuildServerConnection.cancel(BuildServerConnection.scala:116)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$shutdown$1(BuildServerConnection.scala:56)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$shutdown$1$adapted(BuildServerConnection.scala:51)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.InterruptedException
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$register$3(BuildServerConnection.scala:145)
+	at scala.runtime.java8.JFunction0$mcZ$sp.apply(JFunction0$mcZ$sp.java:23)
+	at scala.util.Try$.apply(Try.scala:213)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$register$2(BuildServerConnection.scala:145)
+	at scala.meta.internal.metals.Cancelable$$anon$1.cancel(Cancelable.scala:17)
+	at scala.meta.internal.metals.Cancelable$.$anonfun$cancelAll$1(Cancelable.scala:28)
+	at scala.collection.immutable.List.foreach(List.scala:392)
+	at scala.meta.internal.metals.Cancelable$.cancelAll(Cancelable.scala:27)
+	at scala.meta.internal.metals.MutableCancelable.cancel(MutableCancelable.scala:18)
+	at scala.meta.internal.metals.BuildServerConnection.cancel(BuildServerConnection.scala:116)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$shutdown$1(BuildServerConnection.scala:56)
+	at scala.meta.internal.metals.BuildServerConnection.$anonfun$shutdown$1$adapted(BuildServerConnection.scala:51)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:64)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/khanhnguyen/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  Connected to Build server v1.4.0-RC1-190-ef7d8dba
+INFO  disconnected: build server
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/khanhnguyen/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  Connected to Build server v1.4.0-RC1-190-ef7d8dba
+INFO  time: indexed workspace in 0.44s
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: indexed workspace in 0.42s
+WARN  unsupported Scala 2.11.8
+INFO  time: compiled minidafny in 0.13s
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 0.1s
+INFO  running '/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/metals1391349606228508184/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 95ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 0.1s
+INFO  compiling minidafny (9 scala sources)
+INFO  [info] Loading settings for project minidafny-build from metals.sbt ...
+INFO  time: compiled minidafny in 0.1s
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 0.1s
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 0.1s
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 91ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 0.11s
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 78ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 90ms
+INFO  [info] Loading project definition from /Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/project
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 79ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 85ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 94ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 75ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 62ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 74ms
+INFO  [info] Loading settings for project minidafny from build.sbt ...
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 74ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 96ms
+INFO  [info] Set current project to minidafny (in build file:/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/)
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 68ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 78ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 69ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 73ms
+INFO  [success] Generated .bloop/minidafny-test.json
+INFO  [success] Generated .bloop/minidafny.json
+INFO  [success] Total time: 0 s, completed Apr 22, 2020 3:09:25 PM
+INFO  compiling minidafny (9 scala sources)
+INFO  build tool exit: 0
+INFO  time: ran 'sbt bloopInstall' in 8.22s
+INFO  disconnected: build server
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/khanhnguyen/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  Connected to Build server v1.4.0-RC1-190-ef7d8dba
+INFO  time: indexed workspace in 0.37s
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 0.15s
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 61ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 59ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 60ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 48ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 58ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 51ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 55ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 47ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 55ms
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 58ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 56ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 54ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 71ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 70ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 49ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 60ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 48ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 59ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 54ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 53ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 48ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 57ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 47ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 78ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 53ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 59ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 69ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 54ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 47ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 51ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 47ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 53ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 49ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 44ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 44ms
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 42ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 44ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+WARN  unsupported Scala 2.11.8
+INFO  time: compiled minidafny in 57ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 45ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 37ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 47ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 41ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 48ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 37ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 45ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 41ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 50ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 42ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 37ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 42ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 45ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 58ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 37ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 41ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 34ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 45ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 34ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 41ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 35ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 51ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 35ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 47ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 35ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 37ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 42ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 45ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 37ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 42ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 34ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 35ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 34ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 34ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 35ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 35ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 42ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 35ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 44ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 45ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 44ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 33ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 34ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 45ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 37ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 50ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 68ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 45ms
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 33ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 40ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 34ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 42ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+WARN  unsupported Scala 2.11.8
+INFO  running '/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/metals5449267464459952828/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'
+INFO  [info] Loading settings for project minidafny-build from metals.sbt ...
+INFO  [info] Loading project definition from /Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/project
+INFO  [info] Loading settings for project minidafny from build.sbt ...
+INFO  [info] Set current project to minidafny (in build file:/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/)
+INFO  [warn] 
+INFO  [warn] 	Note: Some unresolved dependencies have extra attributes.  Check that these dependencies exist with the requested attributes.
+INFO  [warn] 		org.scalameta:sbt-scalafmt:2.3.2 (sbtVersion=1.0, scalaVersion=2.11)
+INFO  [warn] 
+INFO  [warn] 	Note: Unresolved dependencies path:
+INFO  [error] sbt.librarymanagement.ResolveException: Error downloading org.scalameta:sbt-scalafmt;sbtVersion=1.0;scalaVersion=2.11:2.3.2
+INFO  [error]   Not found
+INFO  [error]   Not found
+INFO  [error]   not found: /Users/khanhnguyen/.ivy2/local/org.scalameta/sbt-scalafmt/scala_2.11/sbt_1.0/2.3.2/ivys/ivy.xml
+INFO  [error]   not found: https://repo1.maven.org/maven2/org/scalameta/sbt-scalafmt_2.11_1.0/2.3.2/sbt-scalafmt-2.3.2.pom
+INFO  [error]   not found: https://github.com/dzufferey/my_mvn_repo/raw/master/repository/org/scalameta/sbt-scalafmt_2.11_1.0/2.3.2/sbt-scalafmt-2.3.2.pom
+INFO  [error] 	at lmcoursier.CoursierDependencyResolution.unresolvedWarningOrThrow(CoursierDependencyResolution.scala:247)
+INFO  [error] 	at lmcoursier.CoursierDependencyResolution.$anonfun$update$35(CoursierDependencyResolution.scala:216)
+INFO  [error] 	at scala.util.Either$LeftProjection.map(Either.scala:573)
+INFO  [error] 	at lmcoursier.CoursierDependencyResolution.update(CoursierDependencyResolution.scala:216)
+INFO  [error] 	at sbt.librarymanagement.DependencyResolution.update(DependencyResolution.scala:60)
+INFO  [error] 	at sbt.internal.LibraryManagement$.resolve$1(LibraryManagement.scala:52)
+INFO  [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$12(LibraryManagement.scala:102)
+INFO  [error] 	at sbt.util.Tracked$.$anonfun$lastOutput$1(Tracked.scala:69)
+INFO  [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$20(LibraryManagement.scala:115)
+INFO  [error] 	at scala.util.control.Exception$Catch.apply(Exception.scala:228)
+INFO  [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$11(LibraryManagement.scala:115)
+INFO  [error] 	at sbt.internal.LibraryManagement$.$anonfun$cachedUpdate$11$adapted(LibraryManagement.scala:96)
+INFO  [error] 	at sbt.util.Tracked$.$anonfun$inputChanged$1(Tracked.scala:150)
+INFO  [error] 	at sbt.internal.LibraryManagement$.cachedUpdate(LibraryManagement.scala:129)
+INFO  [error] 	at sbt.Classpaths$.$anonfun$updateTask0$5(Defaults.scala:2950)
+INFO  [error] 	at scala.Function1.$anonfun$compose$1(Function1.scala:49)
+INFO  [error] 	at sbt.internal.util.$tilde$greater.$anonfun$$u2219$1(TypeFunctions.scala:62)
+INFO  [error] 	at sbt.std.Transform$$anon$4.work(Transform.scala:67)
+INFO  [error] 	at sbt.Execute.$anonfun$submit$2(Execute.scala:281)
+INFO  [error] 	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:19)
+INFO  [error] 	at sbt.Execute.work(Execute.scala:290)
+INFO  [error] 	at sbt.Execute.$anonfun$submit$1(Execute.scala:281)
+INFO  [error] 	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:178)
+INFO  [error] 	at sbt.CompletionService$$anon$2.call(CompletionService.scala:37)
+INFO  [error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+INFO  [error] 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+INFO  [error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+INFO  [error] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+INFO  [error] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO  [error] 	at java.lang.Thread.run(Thread.java:748)
+INFO  [error] (update) sbt.librarymanagement.ResolveException: Error downloading org.scalameta:sbt-scalafmt;sbtVersion=1.0;scalaVersion=2.11:2.3.2
+INFO  [error]   Not found
+INFO  [error]   Not found
+INFO  [error]   not found: /Users/khanhnguyen/.ivy2/local/org.scalameta/sbt-scalafmt/scala_2.11/sbt_1.0/2.3.2/ivys/ivy.xml
+INFO  [error]   not found: https://repo1.maven.org/maven2/org/scalameta/sbt-scalafmt_2.11_1.0/2.3.2/sbt-scalafmt-2.3.2.pom
+INFO  [error]   not found: https://github.com/dzufferey/my_mvn_repo/raw/master/repository/org/scalameta/sbt-scalafmt_2.11_1.0/2.3.2/sbt-scalafmt-2.3.2.pom
+INFO  [error] Total time: 2 s, completed Apr 22, 2020 3:11:55 PM
+INFO  build tool exit: 1
+INFO  time: ran 'sbt bloopInstall' in 9.97s
+INFO  disconnected: build server
+ERROR sbt command failed: /Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/metals5449267464459952828/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/khanhnguyen/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  Connected to Build server v1.4.0-RC1-190-ef7d8dba
+INFO  time: indexed workspace in 0.34s
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+WARN  unsupported Scala 2.11.8
+INFO  running '/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/metals4319311041836395507/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall'
+INFO  [info] Loading settings for project minidafny-build from metals.sbt ...
+INFO  [info] Loading project definition from /Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/project
+INFO  [info] Loading settings for project minidafny from build.sbt ...
+INFO  [info] Set current project to minidafny (in build file:/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/)
+INFO  [error] Modules were resolved with conflicting cross-version suffixes in ProjectRef(uri("file:/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/"), "minidafny"):
+INFO  [error]    org.scala-lang.modules:scala-parser-combinators _2.12, _2.11
+INFO  [error] java.lang.RuntimeException: Conflicting cross-version suffixes in: org.scala-lang.modules:scala-parser-combinators
+INFO  [error] 	at scala.sys.package$.error(package.scala:30)
+INFO  [error] 	at sbt.librarymanagement.ConflictWarning$.processCrossVersioned(ConflictWarning.scala:39)
+INFO  [error] 	at sbt.librarymanagement.ConflictWarning$.apply(ConflictWarning.scala:19)
+INFO  [error] 	at sbt.Classpaths$.$anonfun$ivyBaseSettings$70(Defaults.scala:2483)
+INFO  [error] 	at scala.Function1.$anonfun$compose$1(Function1.scala:49)
+INFO  [error] 	at sbt.internal.util.$tilde$greater.$anonfun$$u2219$1(TypeFunctions.scala:62)
+INFO  [error] 	at sbt.std.Transform$$anon$4.work(Transform.scala:67)
+INFO  [error] 	at sbt.Execute.$anonfun$submit$2(Execute.scala:281)
+INFO  [error] 	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:19)
+INFO  [error] 	at sbt.Execute.work(Execute.scala:290)
+INFO  [error] 	at sbt.Execute.$anonfun$submit$1(Execute.scala:281)
+INFO  [error] 	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:178)
+INFO  [error] 	at sbt.CompletionService$$anon$2.call(CompletionService.scala:37)
+INFO  [error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+INFO  [error] 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+INFO  [error] 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+INFO  [error] 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+INFO  [error] 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+INFO  [error] 	at java.lang.Thread.run(Thread.java:748)
+INFO  [error] (update) Conflicting cross-version suffixes in: org.scala-lang.modules:scala-parser-combinators
+INFO  [error] Total time: 2 s, completed Apr 22, 2020 3:13:00 PM
+INFO  build tool exit: 1
+INFO  time: ran 'sbt bloopInstall' in 9.95s
+ERROR sbt command failed: /Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/bin/java -Djline.terminal=jline.UnsupportedTerminal -Dsbt.log.noformat=true -Dfile.encoding=UTF-8 -jar /var/folders/90/vrjgdwy17gxdmm1fxdy78c4w0000gn/T/metals4319311041836395507/sbt-launch.jar -Dbloop.export-jar-classifiers=sources bloopInstall
+INFO  disconnected: build server
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/khanhnguyen/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  Connected to Build server v1.4.0-RC1-190-ef7d8dba
+INFO  time: indexed workspace in 0.36s
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  skipping build import with status 'Failed'
+INFO  skipping build import with status 'Failed'
+INFO  skipping build import with status 'Dismissed'
+INFO  skipping build import with status 'Dismissed'
+WARN  unsupported Scala 2.11.8
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 41ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 46ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 33ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 42ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 37ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 37ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 32ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 34ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 39ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 36ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 43ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 33ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 35ms
+INFO  compiling minidafny (9 scala sources)
+INFO  time: compiled minidafny in 38ms
+INFO  shutting down Metals
