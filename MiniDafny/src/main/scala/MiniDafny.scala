@@ -1,5 +1,5 @@
 object MiniDafny extends md.util.MDApp {
-  import md.ast._
+  import md.ast.{BConst, Expr, parse}
   import md.util._
   import md.analysis._
   import scala.util.parsing.input.NoPosition
@@ -27,6 +27,8 @@ object MiniDafny extends md.util.MDApp {
       var wps = WP.computeWP(gc, True)
       println(wps.pretty + "\n")
       var formula = parser.parse(wps)
+      println(formula)
+      println(formula)
       println(solver.testB(formula))
       println("Parsed program:\n")
       println(prog.pretty)

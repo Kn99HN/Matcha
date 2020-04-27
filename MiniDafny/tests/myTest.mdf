@@ -1,5 +1,6 @@
 program myTest
-requires forall x :: 0 <= x && x < aLength ==> a[x] == 0
+requires x == 1
+ensures x == 3
 { 
-  x[0] := 1;
+  x := x + 1;
 }
