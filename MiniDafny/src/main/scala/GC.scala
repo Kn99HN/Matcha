@@ -13,6 +13,7 @@ object GC {
     def genCondProg(prog : Program) : Com = 
         (prog) match {
             case (_) =>
+            genCondPre(prog.pre)
                 Seq (
                     genCondPre(prog.pre),
                     Seq (
@@ -21,11 +22,9 @@ object GC {
                     ))
         }
 
-    //Currently not supported loop invariant
     def genCondBody(comm : Com) : Com = 
         (comm) match {
             case (Skip) => Assume (True)
-            //Assign ("y", BinOp (Times (), AConst (2), Var ("x"))),
             case (Assign (name, expr)) =>
                 var freshName = getFreshVar(name)
                 Seq(

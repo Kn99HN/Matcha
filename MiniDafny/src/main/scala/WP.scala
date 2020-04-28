@@ -8,7 +8,7 @@ object WP {
     def computeWP(com : Com, expr : Expr) : Expr =
         (com) match {
             case(Assume (b)) => return BinOp(Impl, b, expr)
-            case(Assert (b)) => return BinOp(And, b, expr)
+            case(Assert (b)) => return BinOp(Impl, b, expr)
             case (Havoc (b)) => 
                 var fresh = getFreshVar(b)
                 return replaceExpression(b, fresh, expr)
@@ -22,8 +22,8 @@ object WP {
     // @ToDo: Rethink this logic to be more functional
     def getFreshVar(curr : String) : String = {
         if(!frehsMap.contains(curr)) {
-            frehsMap += (curr -> 0)
-            return curr + "a0"
+            frehsMap += (curr -> 1)
+            return curr + "a1"
         } 
         var freshIdx = frehsMap.get(curr).get
         freshIdx += 1

@@ -38,7 +38,7 @@ object parser{
         (expr) match {
             case (AConst (x)) => return (IntLit(x))
             case (BConst (x)) => return (Literal(x))
-            case (Var (x)) => return Variable(x)
+            case (Var (x)) => return Variable(x).setType(Int)
             case (UnOp (op, e)) => 
                 (op) match {
                     case (MyNot) => return SMTNot ((parse(e)).setType(Bool))
@@ -83,7 +83,8 @@ object parser{
             case (Binder (b, xs, e)) =>
                 (b) match {
                     case Forall => 
-                        ForAll(convertList(xs), parse(e))
+                        var list = convertList(xs)
+                        ForAll(list, parse(e))
                     case MyExists => SMTExists(convertList(xs), parse(e))
                 }
 
@@ -91,7 +92,10 @@ object parser{
 
     def convertList(list : List[String]) : List[Variable] = {
         var output = new ListBuffer[Variable]()
-        for(str <- list) output += Variable(str).setType(Int)
+        for(str <- list) {
+            var tmp = Variable(str).setType(Int)
+            output += tmp
+        }
         return output.toList
     }
 }

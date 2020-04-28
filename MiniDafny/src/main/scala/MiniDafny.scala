@@ -22,14 +22,6 @@ object MiniDafny extends md.util.MDApp {
     }
 
     if (debug) {
-      var gc = GC.genCondProg(prog)
-      println(gc.pretty + "\n")
-      var wps = WP.computeWP(gc, True)
-      println(wps.pretty + "\n")
-      var formula = parser.parse(wps)
-      println(formula)
-      println(formula)
-      println(solver.testB(formula))
       println("Parsed program:\n")
       println(prog.pretty)
     }  

@@ -1,6 +1,14 @@
 program myTest
-requires x == 1
-ensures x == 3
-{ 
-  x := x + 1;
+  requires forall x :: 0 <= x && x < aLength ==> a[x] == 0
+  ensures forall x :: 0 <= x && x < aLength ==> a[x] == 1
+{
+  x := 0;
+  while (x < aLength)
+    invariant 0 <= x && x <= aLength
+    invariant forall y :: 0 <= y && y < x ==> a[x] == 1
+    invariant forall y :: x <= y && y < aLength ==> a[x] == 0    
+  {
+    a[x] := a[x] + 1; // a := update(a, x, select(a, x) + 1)
+    x := x + 1;
+  }
 }
