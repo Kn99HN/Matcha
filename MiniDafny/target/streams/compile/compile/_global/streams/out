@@ -1,5 +1,5 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:75:10: match may not be exhaustive.[0m
-[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: Nil[0m
-[0m[[0m[33mwarn[0m] [0m[0m        (modifiedVars) match {[0m
-[0m[[0m[33mwarn[0m] [0m[0m         ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/parser.scala:57:26: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: BConst(_), BinOp(_, _, _), Binder(_, _, _), Select(_, _), UnOp(_, _), Update(_, _, _), Var(_)[0m
+[0m[[0m[33mwarn[0m] [0m[0m                        (e) match {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                         ^[0m
 [0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

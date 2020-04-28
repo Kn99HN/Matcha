@@ -13,7 +13,6 @@ object GC {
     def genCondProg(prog : Program) : Com = 
         (prog) match {
             case (_) =>
-            genCondPre(prog.pre)
                 Seq (
                     genCondPre(prog.pre),
                     Seq (

@@ -161,3 +161,28 @@ run -d tests/myTest.mdf
 run -d tests/test04.mdf
 git add .
 :q
+run -d tests/test04.mdf
+reload
+run -d tests/test04.mdf
+reload
+run -d tests/test01.mdf
+run -d tests/test04.mdf
+run -d tests/myTest.mdf
+run -d tests/test05.mdf
+run -d tests/test04.mdf
+run -d tests/myTest.mdf
+"abc" contains a
+"abc" contains a;
+"abc" contains "a"
+"abc" contains "a";
+"abc".contains('a')
+"abc".contains('a');
+run -d tests/myTest.mdf
+run -d tests/test04.mdf
+run -d tests/myTest.mdf
+reload
+run -d tests/myTest.mdf
+sbt
+run -d tests/myTest.mdf
+run -d tests/test4.mdf
+run -d tests/test04.mdf

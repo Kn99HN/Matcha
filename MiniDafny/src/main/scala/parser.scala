@@ -1,6 +1,5 @@
 object parser{
     import scala.collection.mutable.ListBuffer
-    import org.scalatest._
     import dzufferey.smtlib._
     import dzufferey.smtlib.{
         Not => SMTNot,
@@ -32,13 +31,25 @@ object parser{
     val Array = new UnInterpreted("intarray")
     val select = new UnInterpretedFct("select", Some(Array ~> Int ~> Int))
     val update = new UnInterpretedFct("update", Some(Array ~> Int ~> Int ~> Array))
+    def True: Expr = BConst(true)
 
+    def combineParse(prog: Program) : Unit = {
+        val solver = Z3(UFLIA)
+        var gc = GC.genCondProg(prog)
+        var wp = WP.computeWP(gc, True)
+        var parsed = parse(wp)
+        println(solver.testB(parsed))
+    }
     //parse into Z3 Language using SMT-LIB interface
     def parse(expr : Expr) : Formula =
         (expr) match {
             case (AConst (x)) => return (IntLit(x))
             case (BConst (x)) => return (Literal(x))
-            case (Var (x)) => return Variable(x).setType(Int)
+            case (Var (x)) => 
+                if(x == "aa1") {
+                    return Variable(x).setType(Array)
+                }
+                return Variable(x).setType(Int)
             case (UnOp (op, e)) => 
                 (op) match {
                     case (MyNot) => return SMTNot ((parse(e)).setType(Bool))
@@ -62,7 +73,8 @@ object parser{
                         }
 
                     //comparison
-                    case MyEq => return SMTEq(parse(e1).setType(Int), parse(e2).setType(Int))
+                    case MyEq => 
+                        return SMTEq(parse(e1).setType(Int), parse(e2).setType(Int))
                     case Ne => return SMTNot (SMTEq(parse(e1).setType(Int), parse(e2).setType(Int)))
                     case MyLt => return SMTLt(parse(e1).setType(Int), parse(e2).setType(Int))
                     case Le => return Leq(parse(e1).setType(Int), parse(e2).setType(Int))
@@ -77,15 +89,17 @@ object parser{
 
                 }
             case (Select (name, e)) =>
-                return(select(Variable(name).setType(Array), parse(e)))
+                return select(Variable(name).setType(Array), parse(e))
             case(Update (name, i, ei)) =>
-                return (update(Variable(name).setType(Array), parse(i), parse(ei)))
+                var index = parse(i)
+                var value = parse(ei)
+                return select(update(Variable(name).setType(Array), index, value), index)
             case (Binder (b, xs, e)) =>
                 (b) match {
                     case Forall => 
                         var list = convertList(xs)
-                        ForAll(list, parse(e))
-                    case MyExists => SMTExists(convertList(xs), parse(e))
+                        return ForAll(list, parse(e))
+                    case MyExists => return SMTExists(convertList(xs), parse(e))
                 }
 
         }

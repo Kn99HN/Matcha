@@ -22,6 +22,8 @@ object MiniDafny extends md.util.MDApp {
     }
 
     if (debug) {
+      parser.combineParse(prog)
+      // println(solver.testB(parser.combineParse(prog)))
       println("Parsed program:\n")
       println(prog.pretty)
     }  
