@@ -189,3 +189,5 @@ run -d tests/test04.mdf
 run -d tests/myTest.mdf
 run -d tests/test01.mdf
 run -d tests/myTest.mdf
+run -d tests/test04.mdf
+run -d tests/myTest.mdf

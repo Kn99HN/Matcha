@@ -1,5 +1,6 @@
 object parser{
     import scala.collection.mutable.ListBuffer
+    import scala.collection.immutable.HashMap
     import dzufferey.smtlib._
     import dzufferey.smtlib.{
         Not => SMTNot,
@@ -32,6 +33,7 @@ object parser{
     val select = new UnInterpretedFct("select", Some(Array ~> Int ~> Int))
     val update = new UnInterpretedFct("update", Some(Array ~> Int ~> Int ~> Array))
     def True: Expr = BConst(true)
+    var GlobalMaps = new HashMap[String, Boolean]()
 
     
 
@@ -39,28 +41,52 @@ object parser{
         val solver = Z3(UFLIA)
         var gc = GC.genCondProg(prog)
         var wp = WP.computeWP(gc, True)
-        var negated = UnOp(MyNot, wp)
-        println(wp.pretty)
+        // println(wp.pretty)
         var parsed1 = parse(wp)
-        var parsed2 = parse(negated)
+        // var parsed2 = parse(negated)
 
-        parsed1 = FormulaUtils.simplifyBool(parsed1)
-        parsed2 = FormulaUtils.simplifyBool(parsed2)
-        
-        var a = Variable("a").setType(Bool)
-        var b = Variable("b").setType(Bool)
+        var f = FormulaUtils.simplifyBool(parsed1)
+        // parsed2 = FormulaUtils.simplifyBool(parsed2)
 
-        var final1 = SMTAnd(a, parsed1.setType(Bool))
-        var final2 = SMTAnd(b, parsed2.setType(Bool))
-        
-        var finalized = SMTOr(final1.setType(Bool), final2.setType(Bool))
-        
-        var ls = FormulaUtils.getConjuncts(parsed1)
-        for(i <- ls) println(i)
-        println(solver.testWithModel(finalized))
+        // var a = Variable("a").setType(Bool)
+        // var b = Variable("b").setType(Bool)
 
-        println(solver.testB(finalized))
+        // var final1 = SMTAnd(a, parsed1.setType(Bool))
+        // var final2 = SMTAnd(b, parsed2.setType(Bool))
+        
+        // var finalized = SMTOr(final1.setType(Bool), final2.setType(Bool))
+        
+        // var ls = FormulaUtils.getConjuncts(parsed1)
+        // for(i <- ls) println(i)
+        // println(parsed1)
+        // println(parsed1)
+        var res = solver.testWithModel(parsed1)
+        findError(f, res)
+        println(GlobalMaps)
+        println(solver.testB(parsed1))
     }
+
+    def findError(wp : Expr, maps : HashMap[String, Boolean]) =
+        (f)
+
+    def mapsConstants(r : Result) = 
+        (r) match {
+            case (Sat(None)) => Unit
+            case (Sat(Some (m))) =>
+                m.getClass.getDeclaredFields foreach { f =>
+                    f.setAccessible(true)
+                    if(f.getName == "constants") {
+                        var maps = f.get(m).asInstanceOf[HashMap[Variable, ValDef]]
+                        for ((k,v) <- maps) {
+                            (k,v) match {
+                                case (Variable (name), ValB (b)) =>
+                                    GlobalMaps += name -> b
+                                case (Variable (name), _) => Unit
+                            }
+                        }
+                    }
+                }
+        }
     //parse into Z3 Language using SMT-LIB interface
     def parse(expr : Expr) : Formula =
         (expr) match {

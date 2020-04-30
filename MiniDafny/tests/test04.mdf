@@ -1,4 +1,4 @@
-program test04
+method test04(x)
   requires forall x :: 0 <= x && x < aLength ==> a[x] == 0
   ensures forall x :: 0 <= x && x < aLength ==> a[x] == 1
 {
