@@ -39,33 +39,15 @@ object parser{
     
 
     def combineParse(prog: Program) : Unit = {
-        val solver = Z3(UFLIA)
+        val solver = Z3(UFLIA, "output.txt")
         var gc = GC.genCondProg(prog)
         var wp = WP.computeWP(gc, True)
-        // println(wp.pretty)
-        var parsed1 = parse(wp)
-        // var parsed2 = parse(negated)
+        var wp2 = UnOp(MyNot, wp)
+        var parsed2 = parse(wp2)
 
-        var f = FormulaUtils.simplifyBool(parsed1)
-        // parsed2 = FormulaUtils.simplifyBool(parsed2)
-
-        // var a = Variable("a").setType(Bool)
-        // var b = Variable("b").setType(Bool)
-
-        // var final1 = SMTAnd(a, parsed1.setType(Bool))
-        // var final2 = SMTAnd(b, parsed2.setType(Bool))
-        
-        // var finalized = SMTOr(final1.setType(Bool), final2.setType(Bool))
-        
-        // var ls = FormulaUtils.getConjuncts(parsed1)
-        // for(i <- ls) println(i)
-        // println(parsed1)
-        // println(parsed1)
-        var res = solver.testWithModel(parsed1)
-        mapsConstants(res)
-        println(res)
+        var result = solver.testWithModel(parsed2)
+        mapsConstants(result)
         findError()
-        println(solver.testB(parsed1))
     }
 
     //not handlinng while yet
@@ -76,6 +58,7 @@ object parser{
                 case (Some (b)) => 
                     if (!b) println("Post condition might not hold")
                     else Unit
+                case (None) => Unit
             }
         }
     }
@@ -85,6 +68,7 @@ object parser{
         (r) match {
             case (Sat(None)) => Unit
             case (Sat(Some (m))) =>
+                println("Satisfiable but not a valid program")
                 m.getClass.getDeclaredFields foreach { f =>
                     f.setAccessible(true)
                     if(f.getName == "constants") {
@@ -98,7 +82,9 @@ object parser{
                         }
                     }
                 }
+            case (UnSat) => println("Valid program\n")
         }
+        
     //parse into Z3 Language using SMT-LIB interface
     def parse(expr : Expr) : Formula =
         (expr) match {
@@ -115,6 +101,7 @@ object parser{
                     case (UMinus) =>
                         (e) match {
                             case (AConst (x)) => return IntLit(-x)
+                            case (_) => return parse(e)
                         }
                 }
             case (BinOp (op, e1, e2)) =>
