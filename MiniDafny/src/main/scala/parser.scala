@@ -1,5 +1,6 @@
 object parser{
     import scala.collection.mutable.ListBuffer
+    import scala.collection.immutable.Map
     import scala.collection.immutable.HashMap
     import dzufferey.smtlib._
     import dzufferey.smtlib.{
@@ -61,13 +62,24 @@ object parser{
         // println(parsed1)
         // println(parsed1)
         var res = solver.testWithModel(parsed1)
-        findError(f, res)
-        println(GlobalMaps)
+        mapsConstants(res)
+        println(res)
+        findError()
         println(solver.testB(parsed1))
     }
 
-    def findError(wp : Expr, maps : HashMap[String, Boolean]) =
-        (f)
+    //not handlinng while yet
+    def findError() = {
+        if(GlobalMaps.contains("Assert")) {
+            var bool = GlobalMaps.get("Assert")
+            (bool) match {
+                case (Some (b)) => 
+                    if (!b) println("Post condition might not hold")
+                    else Unit
+            }
+        }
+    }
+        
 
     def mapsConstants(r : Result) = 
         (r) match {
@@ -76,7 +88,7 @@ object parser{
                 m.getClass.getDeclaredFields foreach { f =>
                     f.setAccessible(true)
                     if(f.getName == "constants") {
-                        var maps = f.get(m).asInstanceOf[HashMap[Variable, ValDef]]
+                        var maps = f.get(m).asInstanceOf[Map[Variable, ValDef]]
                         for ((k,v) <- maps) {
                             (k,v) match {
                                 case (Variable (name), ValB (b)) =>

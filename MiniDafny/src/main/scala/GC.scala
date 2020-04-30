@@ -27,11 +27,11 @@ object GC {
             case (Assign (name, expr)) =>
                 var freshName = getFreshVar(name)
                 Seq(
-                    Assume(BinOp(And, BinOp(Eq, Var (freshName), Var (name)), UnOp(Not, Var ("A")))),
+                    Assume(BinOp(Eq, Var (freshName), Var (name))),
                     Seq(
                         Havoc(name),
-                        Assume(BinOp(And, BinOp(Eq, Var (name), 
-                        replaceExpression(name, freshName, expr)), UnOp(Not, Var ("B"))))
+                        Assume(BinOp(Eq, Var (name), 
+                        replaceExpression(name, freshName, expr)))
                     )
                 )
             case (Seq(c1, c2)) =>
@@ -41,8 +41,8 @@ object GC {
                 )
             case If(b, c1, c2) => 
                     (Choice (
-                        Seq (Assume (BinOp(And, b, UnOp(Not, Var ("C")))), genCondBody(c1)),
-                        Seq(Assume(BinOp(And, UnOp(Not, b), UnOp(Not, Var ("D")))), genCondBody(c2))
+                        Seq (Assume (BinOp(And, b, UnOp(Not, Var ("Then")))), genCondBody(c1)),
+                        Seq(Assume(BinOp(And, UnOp(Not, b), UnOp(Not, Var ("Else")))), genCondBody(c2))
                     ))
             case While(b, inv, c) =>
                 findModifiedVariables(c) //get array of modified variables
@@ -61,12 +61,12 @@ object GC {
     
     def genCondPre(pre : Expr) : Com = 
         (pre) match {
-            case (_) => Assume (BinOp(And, pre, UnOp(Not, Var ("E"))))
+            case (_) => Assume (pre)
         }
     
     def genCondPost(post: Expr) : Com =
         (post) match {
-            case (_) => Assert (BinOp(And, post, UnOp(Not, Var ("F"))))
+            case (_) => Assert (BinOp(Or, (post), Var ("Assert")))
         }
     
     //assume there is always body to the while loop

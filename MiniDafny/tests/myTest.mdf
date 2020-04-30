@@ -1,6 +1,6 @@
 method myTest(x)
-  requires x == 0
-  ensures x == 3
-{ 
-  x := x + 1;
+requires x == 0
+ensures x == 0
+{
+  x := x; 
 }

@@ -1,6 +1,6 @@
 method m(x : int) 
 requires x == 0
-ensures x == 3
+ensures x == 0
 {
-    var x := x + 1;
+  var x := x; 
 }
