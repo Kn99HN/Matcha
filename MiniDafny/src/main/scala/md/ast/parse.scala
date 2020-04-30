@@ -13,20 +13,31 @@ object parse extends JavaTokenParsers {
     Set("true", "false", "skip",
         "assume", "assert", "havoc", 
         "if", "else", "while", 
-        "program", "requires", "ensures")
+        "program", "requires", "ensures", "method")
   
+
   def prog: Parser[Program] =
-    positioned("program" ~> ident ~ specs ~ com ^^ {
-      case p~specs~c => 
+    positioned("method" ~> ident ~ arg ~ specs ~ com ^^ {
+      case p~arg~specs~c =>
         val (req, ens) =
           (specs foldLeft (Make.True, Make.True)) {
             case ((req, ens), Left(e)) => (Make.and(req, e), ens)
             case ((req, ens), Right(e)) => (req, Make.and(ens, e))
           }
-        Program(p, req, c, ens)
+        Program(p, arg, req, c, ens)
     })
         
   def specs: Parser[List[Either[Expr, Expr]]] = rep(spec) 
+
+  def arg : Parser[Expr] = 
+      positioned(("(" ~> primaryExpr <~ ")") ^^ {
+        case e => e
+      })
+
+    // def ifCom: Parser[If] =
+    // positioned(("if" ~> "(" ~> expr <~ ")") ~ basicCom ~ opt("else" ~> basicCom) ^^ {
+    //   case e~c1~oc2 => If(e, c1, oc2 getOrElse Skip)
+    // })
     
   def spec: Parser[Either[Expr, Expr]] =
     "requires" ~> expr ^^ { e => Left(e) } |
@@ -50,7 +61,7 @@ object parse extends JavaTokenParsers {
     assertCom |
     assumeCom |
     ifCom |
-    whileCom |
+    whileCom | 
     "{" ~> com <~ "}"
     
   def skipCom: Parser[Com] =

@@ -68,9 +68,13 @@ sealed abstract class Expr extends AST
   case class Seq(c1: Com, c2: Com) extends Com /* c1; c2 */
   case class If(b: Expr, c1: Com, c2: Com) extends Com /* if(b) c1 else c2 */
   case class While(b: Expr, inv: Expr, c: Com) extends Com /* while (b) invariant inv c */
+  case object Argument extends Com
 
   /* Programs */
-  case class Program(p: String, pre: Expr, c: Com, post: Expr) extends AST
+  case class Program(p: String, argument: Expr, pre: Expr, c: Com, post: Expr) extends AST
+  
+  /* Method -> will only handle one argument for now. Will change later */
+  case class Method(n: Var, p : Program) extends AST /* method m(x : int) return (x : int) */
   
   /* Types */
   sealed abstract class Typ {

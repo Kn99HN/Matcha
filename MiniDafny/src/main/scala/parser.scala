@@ -33,12 +33,33 @@ object parser{
     val update = new UnInterpretedFct("update", Some(Array ~> Int ~> Int ~> Array))
     def True: Expr = BConst(true)
 
+    
+
     def combineParse(prog: Program) : Unit = {
         val solver = Z3(UFLIA)
         var gc = GC.genCondProg(prog)
         var wp = WP.computeWP(gc, True)
-        var parsed = parse(wp)
-        println(solver.testB(parsed))
+        var negated = UnOp(MyNot, wp)
+        println(wp.pretty)
+        var parsed1 = parse(wp)
+        var parsed2 = parse(negated)
+
+        parsed1 = FormulaUtils.simplifyBool(parsed1)
+        parsed2 = FormulaUtils.simplifyBool(parsed2)
+        
+        var a = Variable("a").setType(Bool)
+        var b = Variable("b").setType(Bool)
+
+        var final1 = SMTAnd(a, parsed1.setType(Bool))
+        var final2 = SMTAnd(b, parsed2.setType(Bool))
+        
+        var finalized = SMTOr(final1.setType(Bool), final2.setType(Bool))
+        
+        var ls = FormulaUtils.getConjuncts(parsed1)
+        for(i <- ls) println(i)
+        println(solver.testWithModel(finalized))
+
+        println(solver.testB(finalized))
     }
     //parse into Z3 Language using SMT-LIB interface
     def parse(expr : Expr) : Formula =

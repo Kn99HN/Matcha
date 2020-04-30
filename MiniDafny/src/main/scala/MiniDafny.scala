@@ -11,8 +11,6 @@ object MiniDafny extends md.util.MDApp {
   /* Interface to run your verifier from the command line. */ 
   
   def processFile(file: java.io.File) {
-    val solver = Z3(UFLIA)
-
     if (debug) {
       println("Parsing " + file.getName + "...")
     }
@@ -22,10 +20,9 @@ object MiniDafny extends md.util.MDApp {
     }
 
     if (debug) {
-      parser.combineParse(prog)
-      // println(solver.testB(parser.combineParse(prog)))
+      // parser.combineParse(prog)
       println("Parsed program:\n")
-      println(prog.pretty)
+      println(prog)
     }  
    
     handle(fail()) {

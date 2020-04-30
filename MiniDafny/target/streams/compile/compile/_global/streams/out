@@ -1,5 +1,6 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/parser.scala:57:26: match may not be exhaustive.[0m
-[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: BConst(_), BinOp(_, _, _), Binder(_, _, _), Select(_, _), UnOp(_, _), Update(_, _, _), Var(_)[0m
-[0m[[0m[33mwarn[0m] [0m[0m                        (e) match {[0m
-[0m[[0m[33mwarn[0m] [0m[0m                         ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/md/ast/parse.scala:35:19: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : md.ast.Expr[0m
+[0m[[0m[31merror[0m] [0m[0m required: md.ast.Var[0m
+[0m[[0m[31merror[0m] [0m[0m        case e => e[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m

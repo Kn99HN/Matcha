@@ -29,7 +29,7 @@ object print extends PrettyPrinter {
       case Skip | Assign(_, _) | Assert(_) | Assume(_) | Havoc(_) => 16
       case Seq(_, _) | Choice(_, _) => 17
       case If(_, _, _) | While(_, _, _) => 18
-      case Program(_, _, _, _) => 19
+      case Program(_, _, _, _, _) => 19
     }
   
   /* Associativity of binary operators */
@@ -129,7 +129,7 @@ object print extends PrettyPrinter {
         "while" <+> parens(show(b)) <> 
            nest(line <> "invariant" <+> nest(show(inv))) <> line <>
            braces(nest(line <> show(c)) <> line)
-      case Program(p, req, c, ens) => 
+      case Program(p, _, req, c, ens) => 
         "program" <+> p <>  
           nest(line <> "requires" <+> show(req) <> line <> "ensures" <+> show(ens)) <> 
             line <> braces(nest(line <> show(c)) <> line)

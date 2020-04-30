@@ -8,6 +8,21 @@ object WP {
     def computeWP(com : Com, expr : Expr) : Expr =
         (com) match {
             case(Assume (b)) => return BinOp(Impl, b, expr)
+            case(Assert (b)) => 
+                return BinOp(And, b, expr)
+            case (Havoc (b)) => 
+                var fresh = getFreshVar(b)
+                return replaceExpression(b, fresh, expr)
+            case(Seq (c1, c2)) =>
+                computeWP(c1, computeWP(c2, expr))
+            case(Choice (c1, c2)) =>
+                BinOp(And, computeWP(c1, expr), computeWP(c2, expr))
+
+        }
+
+    def computeWLP(com : Com, expr : Expr) : Expr =
+        (com) match {
+            case(Assume (b)) => return BinOp(Impl, b, expr)
             case(Assert (b)) => return BinOp(Impl, b, expr)
             case (Havoc (b)) => 
                 var fresh = getFreshVar(b)

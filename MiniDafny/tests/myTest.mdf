@@ -1,8 +1,4 @@
-program myTest
-
-{
-  while (x < aLength)   
-  {
-    a[x] := 0; 
-  }
+method myTest(x)
+{ 
+  x := x + 1;
 }
