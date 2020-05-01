@@ -48,6 +48,7 @@ object parser{
         var result = solver.testWithModel(parsed2)
         mapsConstants(result)
         findError()
+        println(result)
     }
 
     //not handlinng while yet

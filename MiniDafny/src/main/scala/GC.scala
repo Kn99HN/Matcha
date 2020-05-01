@@ -41,8 +41,8 @@ object GC {
                 )
             case If(b, c1, c2) => 
                     (Choice (
-                        Seq (Assume (BinOp(And, b, UnOp(Not, Var ("Then")))), genCondBody(c1)),
-                        Seq(Assume(BinOp(And, UnOp(Not, b), UnOp(Not, Var ("Else")))), genCondBody(c2))
+                        Seq (Assume (BinOp(And, b, Var ("Then"))), genCondBody(c1)),
+                        Seq(Assume(BinOp(And, UnOp(Not, b), Var ("Else"))), genCondBody(c2))
                     ))
             case While(b, inv, c) =>
                 findModifiedVariables(c) //get array of modified variables
