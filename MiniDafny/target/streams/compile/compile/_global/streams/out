@@ -1,5 +1,18 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:74:10: match may not be exhaustive.[0m
-[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: Nil[0m
-[0m[[0m[33mwarn[0m] [0m[0m        (modifiedVars) match {[0m
-[0m[[0m[33mwarn[0m] [0m[0m         ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:29:62: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
+[0m[[0m[31merror[0m] [0m[0m required: md.ast.Com[0m
+[0m[[0m[31merror[0m] [0m[0m                    case (MethodApplication (name, args)) => {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:95:53: not found: type args[0m
+[0m[[0m[31merror[0m] [0m[0m    def replaceExpression(method: Expr, args : List[args]) {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:87:10: not found: value methods[0m
+[0m[[0m[31merror[0m] [0m[0m        (methods) match {[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:88:23: not found: type xs[0m
+[0m[[0m[31merror[0m] [0m[0m            case (x : xs) => {[0m
+[0m[[0m[31merror[0m] [0m[0m                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:90:33: not found: value xs[0m
+[0m[[0m[31merror[0m] [0m[0m                else findMethod(xs, name)[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m5 errors found[0m

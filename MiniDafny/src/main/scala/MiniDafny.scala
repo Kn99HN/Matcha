@@ -20,7 +20,7 @@ object MiniDafny extends md.util.MDApp {
     }
 
     if (debug) {
-      parser.combineParse(prog)
+      // parser.combineParse(prog)
       println("Parsed program:\n")
       println(prog)
     }  

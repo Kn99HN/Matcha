@@ -129,12 +129,15 @@ object typeCheck {
         } yield TUnit
       case Argument =>
         State.insert(TUnit)
-      case Program(_, _, pre, c, post) =>
+      case Method(_, _, _, pre, c, post) =>
         for {
           _ <- typ(TBool, pre)
           _ <- typ(TBool, post)
           _ <- typ(TUnit, c)
         } yield TUnit
+      //TUnit type for now
+      case Program(_, _) =>
+        State.insert(TUnit)
     }
   }
   

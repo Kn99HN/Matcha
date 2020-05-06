@@ -32,6 +32,10 @@ sealed abstract class Expr extends AST
   sealed abstract class BinderKind extends Positional
   case object Exists extends BinderKind
   case object Forall extends BinderKind
+
+  /* Functions */
+  case class Method(name: String, arguments: List[Expr], returnVal: Expr, pre: Expr, c: Com, post: Expr) extends Expr
+  case class MethodApplication(name: String, arguments: List[Expr]) extends Expr
   
   /* Binary Operators */
   sealed abstract class Bop
@@ -70,11 +74,11 @@ sealed abstract class Expr extends AST
   case class While(b: Expr, inv: Expr, c: Com) extends Com /* while (b) invariant inv c */
   case object Argument extends Com
 
-  /* Programs */
-  case class Program(p: String, argument: Expr, pre: Expr, c: Com, post: Expr) extends AST
+  /* Programs -> Handling one method right now */
+  case class Program(p: String, methods: List[Method]) extends AST
   
   /* Method -> will only handle one argument for now. Will change later */
-  case class Method(n: Var, p : Program) extends AST /* method m(x : int) return (x : int) */
+  // case class Method(n: Var, p : Program) extends AST /* method m(x : int) return (x : int) */
   
   /* Types */
   sealed abstract class Typ {

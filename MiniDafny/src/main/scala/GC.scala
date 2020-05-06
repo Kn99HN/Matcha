@@ -10,7 +10,7 @@ object GC {
     def False: Expr = BConst(false) 
 
     //Computing the verification condition for a program
-    def genCondProg(prog : Program) : Com = 
+    def genCondProg(prog : Method) : Com = 
         (prog) match {
             case (_) =>
                 Seq (
@@ -25,15 +25,28 @@ object GC {
         (comm) match {
             case (Skip) => Assume (True)
             case (Assign (name, expr)) =>
-                var freshName = getFreshVar(name)
-                Seq(
-                    Assume(BinOp(Eq, Var (freshName), Var (name))),
-                    Seq(
-                        Havoc(name),
-                        Assume(BinOp(Eq, Var (name), 
-                        replaceExpression(name, freshName, expr)))
-                    )
-                )
+                (expr) match {
+                    case (MethodApplication (name, args)) => {
+                        // var methods = findMethod(prog, )
+                        /*
+                        _ Find the method in the program
+                        - First replacing arguments into the pre-condition
+                        - Replacing args into the post-condition
+                        - Getting the return value
+                        */
+                    }
+                    case (_) => {
+                        var freshName = getFreshVar(name)
+                        Seq(
+                            Assume(BinOp(Eq, Var (freshName), Var (name))),
+                            Seq(
+                                Havoc(name),
+                                Assume(BinOp(Eq, Var (name), 
+                                replaceExpression(name, freshName, expr)))
+                            )
+                        )
+                    }
+                }
             case (Seq(c1, c2)) =>
                 Seq(
                     genCondBody(c1),
@@ -68,6 +81,20 @@ object GC {
         (post) match {
             case (_) => Assert (BinOp(Or, (post), Var ("Assert")))
         }
+    
+    //handling null cases
+    def findMethod(progs: List[Method], name: String) : Method =
+        (methods) match {
+            case (x : xs) => {
+                if(x.name == name) return x
+                else findMethod(xs, name)
+            }
+        }
+
+    //handling replacing values into post and pre -> evaluate the function or calculate results -> How?
+    def replaceExpression(method: Expr, args : List[args]) {
+        
+    }
     
     //assume there is always body to the while loop
     def convertModVars(modifiedVars : List[String]) : Com =

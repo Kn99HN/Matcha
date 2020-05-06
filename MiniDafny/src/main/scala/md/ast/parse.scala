@@ -13,31 +13,51 @@ object parse extends JavaTokenParsers {
     Set("true", "false", "skip",
         "assume", "assert", "havoc", 
         "if", "else", "while", 
-        "program", "requires", "ensures", "method")
+        "program", "requires", "ensures", "method", "return")
   
-
   def prog: Parser[Program] =
-    positioned("method" ~> ident ~ arg ~ specs ~ com ^^ {
-      case p~arg~specs~c =>
+    positioned("program" ~> ident ~ methods ^^ {
+      case name ~ methods => Program(name, methods)
+    }) 
+
+  def methods : Parser[List[Method]] = rep(method)
+
+  def method: Parser[Method] =
+    positioned("method" ~> ident ~ args ~ ret ~ specs ~ com ^^ {
+      case name ~ args ~ ret ~ specs ~ c =>
         val (req, ens) =
           (specs foldLeft (Make.True, Make.True)) {
             case ((req, ens), Left(e)) => (Make.and(req, e), ens)
             case ((req, ens), Right(e)) => (req, Make.and(ens, e))
           }
-        Program(p, arg, req, c, ens)
+        Method(name, args, ret, req, c, ens)
     })
         
   def specs: Parser[List[Either[Expr, Expr]]] = rep(spec) 
 
-  def arg : Parser[Expr] = 
-      positioned(("(" ~> primaryExpr <~ ")") ^^ {
-        case e => e
-      })
+  def args : Parser[List[Expr]] = rep(arg)
 
-    // def ifCom: Parser[If] =
-    // positioned(("if" ~> "(" ~> expr <~ ")") ~ basicCom ~ opt("else" ~> basicCom) ^^ {
-    //   case e~c1~oc2 => If(e, c1, oc2 getOrElse Skip)
-    // })
+  def arg : Parser[Expr] = 
+    positioned("," ~> ident <~ ")" ^^ {
+      case last =>
+        Var(last)
+    }) |
+    positioned("," ~> ident ^^ {
+      case next => 
+        Var(next)
+    }) | 
+    positioned("(" ~> ident <~ ")" ^^ {
+      case va => Var(va)
+    }) | 
+    positioned("(" ~> ident ^^ {
+      case first =>
+        Var(first)
+    })
+
+  def ret : Parser[Expr] =
+    positioned ("return" ~> primaryExpr) ^^ {
+      case e => e
+    }
     
   def spec: Parser[Either[Expr, Expr]] =
     "requires" ~> expr ^^ { e => Left(e) } |
@@ -68,10 +88,17 @@ object parse extends JavaTokenParsers {
     "skip" ^^^ Skip
     
   def assignCom: Parser[Assign] =
-    positioned((ident <~ ":=") ~ expr <~ ";" ^^ { case x~e => Assign(x, e) } ) |
+    positioned((ident <~ ":=") ~ expr <~ ";" ^^ { 
+      case x~e => 
+      Assign(x, e) 
+    } ) |
     positioned((ident ~ ("[" ~> expr <~ "]") <~ ":=") ~ expr <~ ";" ^^ { 
       case x~i~ei => Assign(x, Update(x, i, ei)) 
-    } )
+    } ) | 
+    positioned(((ident <~ ":=")) ~ methodApp <~ ";" ^^ {
+      case x ~ e =>
+      Assign(x, e)
+    })
 
   def havocCom: Parser[Havoc] =
     positioned("havoc" ~> ident <~ ";" ^^ { x => Havoc(x) }) 
@@ -97,7 +124,14 @@ object parse extends JavaTokenParsers {
   def invariant: Parser[Expr] =
     "invariant" ~> expr 
     
-  def expr: Parser[Expr] = binderExpr
+  def expr: Parser[Expr] = 
+  binderExpr
+
+  def methodApp : Parser[Expr] =
+    positioned(ident ~ args ^^ {
+      case name ~ args =>  
+      MethodApplication(name, args)
+    })
  
   def binderExpr: Parser[Expr] =
     rep(binderKind ~ ident ~ rep("," ~> ident) <~ "::") ~ iffExpr ^^ {

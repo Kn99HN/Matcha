@@ -38,7 +38,7 @@ object parser{
 
     
 
-    def combineParse(prog: Program) : Unit = {
+    def combineParse(prog: Method) : Unit = {
         val solver = Z3(UFLIA, "output.txt")
         var gc = GC.genCondProg(prog)
         var wp = WP.computeWP(gc, True)
