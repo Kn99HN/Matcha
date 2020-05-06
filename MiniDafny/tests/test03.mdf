@@ -1,4 +1,4 @@
-method test03(x)
+method test03(x) return (y)
   requires x >= 0
   ensures y == x * x
 {

@@ -5,35 +5,81 @@ object GC {
     var list = new ListBuffer[Com]()
     var frehsMap:Map[String,Int] = Map()
     var modVars = new ListBuffer[String]()
+    var funcVarMaps: Map[String, Int] = Map()
+    var functionMap: Map[String, Method] = Map() 
 
     def True: Expr = BConst(true)
     def False: Expr = BConst(false) 
 
-    //Computing the verification condition for a program
+    /*
+        - @TODO: create mapping for function names
+    */
+
+    def genFunctionMap(prog: List[Method]) : Unit = 
+        (prog) match {
+            case (x :: xs) => 
+                (x) match {
+                    case (Method (name, _, _, _, _, _ )) => functionMap += (name -> x)
+                }
+                genFunctionMap(xs)
+            case Nil => Unit
+        }
+
+    def gendCondProgram(prog: List[Method]) : List[Com] = {
+        var output = new ListBuffer[Com]()
+        genFunctionMap(prog)
+        genCondProgram(prog, output).toList
+    }
+
+    //changing ordering of appending later
+    def genCondProgram(prog: List[Method], output: ListBuffer[Com]) : ListBuffer[Com] =
+        (prog) match {
+            case (x :: xs) => (output += genCondProg(x)) ++ genCondProgram(xs, output) 
+            case Nil => output
+        }
+
+    //Computing the verification condition for a method
     def genCondProg(prog : Method) : Com = 
         (prog) match {
             case (_) =>
                 Seq (
                     genCondPre(prog.pre),
                     Seq (
-                        genCondBody(prog.c),
+                        genCondBody(prog.name, prog.c),
                         genCondPost(prog.post)
                     ))
         }
 
-    def genCondBody(comm : Com) : Com = 
+    def genCondBody(callerName: String, comm : Com) : Com = 
         (comm) match {
             case (Skip) => Assume (True)
             case (Assign (name, expr)) =>
                 (expr) match {
-                    case (MethodApplication (name, args)) => {
-                        // var methods = findMethod(prog, )
-                        /*
-                        _ Find the method in the program
-                        - First replacing arguments into the pre-condition
-                        - Replacing args into the post-condition
-                        - Getting the return value
-                        */
+                    case (MethodApplication (methodName, args)) => {
+                        var callee = 
+                            (functionMap.get(methodName)) match {
+                                case (Some (method)) => method
+                            }
+                        var caller = 
+                            (functionMap.get(callerName)) match {
+                                case (Some (caller)) => caller
+                            }
+                        replaceExpression(caller, callee)
+                        var newPre = replaceExpression(callee.pre)
+                        var fresh = getFreshVar(name)
+                        var newPost = replaceExpression(callee.post)
+                        var ret = (caller.returnVal) match {
+                            case (Var (retName)) => retName
+                            case (_) => ""
+                        }
+                        var newPostRet = replaceExpression(ret, fresh, newPost)
+                        Seq(
+                            Assert(newPre),
+                            Seq(
+                                Assume(newPostRet),
+                                Assign(name, Var (fresh))
+                            )
+                        )
                     }
                     case (_) => {
                         var freshName = getFreshVar(name)
@@ -49,13 +95,13 @@ object GC {
                 }
             case (Seq(c1, c2)) =>
                 Seq(
-                    genCondBody(c1),
-                    genCondBody(c2)
+                    genCondBody(callerName, c1),
+                    genCondBody(callerName , c2)
                 )
             case If(b, c1, c2) => 
                     (Choice (
-                        Seq (Assume (BinOp(And, b, Var ("Then"))), genCondBody(c1)),
-                        Seq(Assume(BinOp(And, UnOp(Not, b), Var ("Else"))), genCondBody(c2))
+                        Seq (Assume (BinOp(And, b, Var ("Then"))), genCondBody(callerName, c1)),
+                        Seq(Assume(BinOp(And, UnOp(Not, b), Var ("Else"))), genCondBody(callerName, c2))
                     ))
             case While(b, inv, c) =>
                 findModifiedVariables(c) //get array of modified variables
@@ -65,7 +111,7 @@ object GC {
                     Seq(havocs, 
                     Seq(Assume (inv), Choice(
                         Seq(Assume (b),
-                        Seq (genCondBody(c),
+                        Seq (genCondBody(callerName, c),
                         Seq(Assert (inv),Assume (False)))),
                         Assume (UnOp(Not, b)))))
                 )
@@ -84,16 +130,40 @@ object GC {
     
     //handling null cases
     def findMethod(progs: List[Method], name: String) : Method =
-        (methods) match {
-            case (x : xs) => {
+        (progs) match {
+            case (x :: xs) => {
                 if(x.name == name) return x
                 else findMethod(xs, name)
             }
         }
 
-    //handling replacing values into post and pre -> evaluate the function or calculate results -> How?
-    def replaceExpression(method: Expr, args : List[args]) {
-        
+    //mapping all variables with its values
+    def replaceExpression(caller: Method, callee: Method) : Unit = {
+        var listCaller = caller.arguments
+        var listCallee = callee.arguments
+        (listCallee zip listCaller).map{
+            case(Var (name), AConst (value)) => funcVarMaps += (name -> value)
+            case(_) => Unit
+        }
+    }
+
+    //replace using the mapping
+    def replaceExpression(expr: Expr) : Expr = {
+        (expr) match {
+            case (Var (name)) => {
+                if(funcVarMaps.contains(name)) {
+                    var value = funcVarMaps.get(name)
+                    (value) match {
+                        case (Some (i)) => AConst(i)
+                        case (_) => expr
+                    }
+                }
+                else expr
+            }
+            case(BinOp (op, e1, e2)) => BinOp(op, replaceExpression(e1), replaceExpression(e2))
+            case(UnOp (op, e)) => UnOp(op, replaceExpression(e))
+            case(_) => expr
+        }
     }
     
     //assume there is always body to the while loop
@@ -137,7 +207,7 @@ object GC {
         frehsMap += (curr -> freshIdx)
         return curr + freshIdx.toString()
     }
-
+    
     def replaceExpression(curr: String, fresh: String, expr: Expr) : Expr = 
         (expr) match {
             case (Var (name)) => 

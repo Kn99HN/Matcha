@@ -1,18 +1,12 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:29:62: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : Unit[0m
-[0m[[0m[31merror[0m] [0m[0m required: md.ast.Com[0m
-[0m[[0m[31merror[0m] [0m[0m                    case (MethodApplication (name, args)) => {[0m
-[0m[[0m[31merror[0m] [0m[0m                                                             ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:95:53: not found: type args[0m
-[0m[[0m[31merror[0m] [0m[0m    def replaceExpression(method: Expr, args : List[args]) {[0m
-[0m[[0m[31merror[0m] [0m[0m                                                    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:87:10: not found: value methods[0m
-[0m[[0m[31merror[0m] [0m[0m        (methods) match {[0m
-[0m[[0m[31merror[0m] [0m[0m         ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:88:23: not found: type xs[0m
-[0m[[0m[31merror[0m] [0m[0m            case (x : xs) => {[0m
-[0m[[0m[31merror[0m] [0m[0m                      ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:90:33: not found: value xs[0m
-[0m[[0m[31merror[0m] [0m[0m                else findMethod(xs, name)[0m
-[0m[[0m[31merror[0m] [0m[0m                                ^[0m
-[0m[[0m[31merror[0m] [0m[0m5 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:68:51: type mismatch;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : Product with Serializable[0m
+[0m[[0m[31merror[0m] [0m[0m required: md.ast.Method[0m
+[0m[[0m[31merror[0m] [0m[0m                        replaceExpression(caller, callee)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:69:63: value pre is not a member of Product with Serializable[0m
+[0m[[0m[31merror[0m] [0m[0m                        var newPre = replaceExpression(callee.pre)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:71:64: value post is not a member of Product with Serializable[0m
+[0m[[0m[31merror[0m] [0m[0m                        var newPost = replaceExpression(callee.post)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                               ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m

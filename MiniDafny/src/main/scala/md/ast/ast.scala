@@ -74,7 +74,7 @@ sealed abstract class Expr extends AST
   case class While(b: Expr, inv: Expr, c: Com) extends Com /* while (b) invariant inv c */
   case object Argument extends Com
 
-  /* Programs -> Handling one method right now */
+  /* Programs */
   case class Program(p: String, methods: List[Method]) extends AST
   
   /* Method -> will only handle one argument for now. Will change later */
