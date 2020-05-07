@@ -1,12 +1,5 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:68:51: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : Product with Serializable[0m
-[0m[[0m[31merror[0m] [0m[0m required: md.ast.Method[0m
-[0m[[0m[31merror[0m] [0m[0m                        replaceExpression(caller, callee)[0m
-[0m[[0m[31merror[0m] [0m[0m                                                  ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:69:63: value pre is not a member of Product with Serializable[0m
-[0m[[0m[31merror[0m] [0m[0m                        var newPre = replaceExpression(callee.pre)[0m
-[0m[[0m[31merror[0m] [0m[0m                                                              ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:71:64: value post is not a member of Product with Serializable[0m
-[0m[[0m[31merror[0m] [0m[0m                        var newPost = replaceExpression(callee.post)[0m
-[0m[[0m[31merror[0m] [0m[0m                                                               ^[0m
-[0m[[0m[31merror[0m] [0m[0mthree errors found[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/parser.scala:74:10: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: Method(_, _, _, _, _, _), MethodApplication(_, _)[0m
+[0m[[0m[33mwarn[0m] [0m[0m        (expr) match {[0m
+[0m[[0m[33mwarn[0m] [0m[0m         ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m

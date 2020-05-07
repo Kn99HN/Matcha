@@ -72,7 +72,7 @@ sealed abstract class Expr extends AST
   case class Seq(c1: Com, c2: Com) extends Com /* c1; c2 */
   case class If(b: Expr, c1: Com, c2: Com) extends Com /* if(b) c1 else c2 */
   case class While(b: Expr, inv: Expr, c: Com) extends Com /* while (b) invariant inv c */
-  case object Argument extends Com
+  case class Return(b: String) extends Com /* return x */
 
   /* Programs */
   case class Program(p: String, methods: List[Method]) extends AST

@@ -13,7 +13,7 @@ object parse extends JavaTokenParsers {
     Set("true", "false", "skip",
         "assume", "assert", "havoc", 
         "if", "else", "while", 
-        "program", "requires", "ensures", "method", "return")
+        "program", "requires", "ensures", "method", "returns", "return")
   
   def prog: Parser[Program] =
     positioned("program" ~> ident ~ methods ^^ {
@@ -38,24 +38,21 @@ object parse extends JavaTokenParsers {
   def args : Parser[List[Expr]] = rep(arg)
 
   def arg : Parser[Expr] = 
-    positioned("," ~> ident <~ ")" ^^ {
-      case last =>
-        Var(last)
+    positioned("," ~> primaryExpr <~ ")" ^^ {
+      case last => last
     }) |
-    positioned("," ~> ident ^^ {
-      case next => 
-        Var(next)
+    positioned("," ~> primaryExpr ^^ {
+      case next => next
     }) | 
-    positioned("(" ~> ident <~ ")" ^^ {
-      case va => Var(va)
+    positioned("(" ~> primaryExpr <~ ")" ^^ {
+      case va => va
     }) | 
-    positioned("(" ~> ident ^^ {
-      case first =>
-        Var(first)
+    positioned("(" ~> primaryExpr ^^ {
+      case first => first
     })
 
   def ret : Parser[Expr] =
-    positioned ("return" ~> primaryExpr) ^^ {
+    positioned ("returns" ~> primaryExpr) ^^ {
       case e => e
     }
     
@@ -82,11 +79,12 @@ object parse extends JavaTokenParsers {
     assumeCom |
     ifCom |
     whileCom | 
+    retCom |
     "{" ~> com <~ "}"
     
   def skipCom: Parser[Com] =
     "skip" ^^^ Skip
-    
+  
   def assignCom: Parser[Assign] =
     positioned((ident <~ ":=") ~ expr <~ ";" ^^ { 
       case x~e => 
@@ -120,18 +118,22 @@ object parse extends JavaTokenParsers {
         val inv = (invs foldLeft Make.True) { (e1, e2) => Make.and(e1, e2) }
         While(b, inv, c)
     })
+  
+  def retCom : Parser[Return] = 
+    positioned("return" ~> ident <~ ";" ^^ {
+      case name => Return(name)
+    })
     
   def invariant: Parser[Expr] =
     "invariant" ~> expr 
     
-  def expr: Parser[Expr] = 
-  binderExpr
+  def expr: Parser[Expr] = binderExpr
 
   def methodApp : Parser[Expr] =
     positioned(ident ~ args ^^ {
-      case name ~ args =>  
-      MethodApplication(name, args)
+      case name ~ args => MethodApplication(name, args)
     })
+
  
   def binderExpr: Parser[Expr] =
     rep(binderKind ~ ident ~ rep("," ~> ident) <~ "::") ~ iffExpr ^^ {

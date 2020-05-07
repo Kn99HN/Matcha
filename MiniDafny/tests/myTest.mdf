@@ -1,11 +1,15 @@
 program myTest
-method myTest(x) return (x)
+method myTest(x,y) returns (x)
 requires x == 0
 ensures x == 0
 {
   x := 1; 
+  y := foo(1);
 }
 
-
-//y := foo(); //call statement
-//progam(List[Methods])
+method foo(x) returns (y)
+requires x == 1
+ensures y == 2
+{
+  x := 2;
+}

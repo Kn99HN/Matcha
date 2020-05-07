@@ -38,55 +38,39 @@ object parser{
 
     
 
-    def combineParse(prog: Method) : Unit = {
+    def combineParse(prog: Program) : Unit = {
         val solver = Z3(UFLIA, "output.txt")
-        var gc = GC.genCondProg(prog)
-        var wp = WP.computeWP(gc, True)
-        var wp2 = UnOp(MyNot, wp)
-        var parsed2 = parse(wp2)
+        var methods = prog.methods
+        var gc = GC.genCondProgram(methods)
+        var wp = WP.computeWPs(gc)
+        // var gc = GC.genCondProgram(prog.methods : List[Method])
+        // var gc = GC.genCondProg(prog)
+        // var wp = WP.computeWP(gc, True)
+        // var wp2 = UnOp(MyNot, wp)
+        // var parsed2 = parse(wp2)
 
-        var result = solver.testWithModel(parsed2)
-        mapsConstants(result)
-        findError()
-        println(result)
+        // var result = solver.testWithModel(parsed2)
+        // mapsConstants(result)
+        // findError()
+        // println(result)
     }
 
-    //not handlinng while yet
-    def findError() = {
-        if(GlobalMaps.contains("Assert")) {
-            var bool = GlobalMaps.get("Assert")
-            (bool) match {
-                case (Some (b)) => 
-                    if (!b) println("Post condition might not hold")
-                    else Unit
-                case (None) => Unit
-            }
+    def parseVC(expr: List[Expr]) : List[Formula] = {
+        var output = new ListBuffer[Formula]()
+        parseVC(expr, output).toList
+    }
+
+    def parseVC(expr: List[Expr], output: ListBuffer[Formula]) : ListBuffer[Formula] = {
+        (expr) match {
+            case Nil => output
+            case (x :: xs) => 
+                (output += parse(x))
+                parseVC(xs, output)
         }
     }
-        
 
-    def mapsConstants(r : Result) = 
-        (r) match {
-            case (Sat(None)) => Unit
-            case (Sat(Some (m))) =>
-                println("Satisfiable but not a valid program")
-                m.getClass.getDeclaredFields foreach { f =>
-                    f.setAccessible(true)
-                    if(f.getName == "constants") {
-                        var maps = f.get(m).asInstanceOf[Map[Variable, ValDef]]
-                        for ((k,v) <- maps) {
-                            (k,v) match {
-                                case (Variable (name), ValB (b)) =>
-                                    GlobalMaps += name -> b
-                                case (Variable (name), _) => Unit
-                            }
-                        }
-                    }
-                }
-            case (UnSat) => println("Valid program\n")
-        }
-        
     //parse into Z3 Language using SMT-LIB interface
+    //figuring out grammar and syntax for method application
     def parse(expr : Expr) : Formula =
         (expr) match {
             case (AConst (x)) => return (IntLit(x))
@@ -148,8 +132,48 @@ object parser{
                         return ForAll(list, parse(e))
                     case MyExists => return SMTExists(convertList(xs), parse(e))
                 }
+            case (MethodApplication (name, args) => {
+                
+            })
 
         }
+
+    
+    //not handlinng while yet
+    def findError() = {
+        if(GlobalMaps.contains("Assert")) {
+            var bool = GlobalMaps.get("Assert")
+            (bool) match {
+                case (Some (b)) => 
+                    if (!b) println("Post condition might not hold")
+                    else Unit
+                case (None) => Unit
+            }
+        }
+    }
+        
+
+    def mapsConstants(r : Result) = 
+        (r) match {
+            case (Sat(None)) => Unit
+            case (Sat(Some (m))) =>
+                println("Satisfiable but not a valid program")
+                m.getClass.getDeclaredFields foreach { f =>
+                    f.setAccessible(true)
+                    if(f.getName == "constants") {
+                        var maps = f.get(m).asInstanceOf[Map[Variable, ValDef]]
+                        for ((k,v) <- maps) {
+                            (k,v) match {
+                                case (Variable (name), ValB (b)) =>
+                                    GlobalMaps += name -> b
+                                case (Variable (name), _) => Unit
+                            }
+                        }
+                    }
+                }
+            case (UnSat) => println("Valid program\n")
+        }
+        
 
     def convertList(list : List[String]) : List[Variable] = {
         var output = new ListBuffer[Variable]()

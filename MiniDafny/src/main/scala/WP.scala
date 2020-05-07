@@ -1,8 +1,22 @@
 object WP {
     import md.ast._
+    import scala.collection.mutable.ListBuffer
 
     //map for freshvariables
     var frehsMap:Map[String,Int] = Map()
+    def True: Expr = BConst(true)
+    
+    def computeWPs(coms: List[Com]) : List[Expr] = {
+        var output = new ListBuffer[Expr]()
+        computeWPs(coms, output).toList
+    }
+    def computeWPs(coms : List[Com], output : ListBuffer[Expr]) : ListBuffer[Expr] = 
+        (coms) match {
+            case (x :: xs) => 
+                output += (computeWP(x, True))
+                computeWPs(xs, output)
+            case Nil => output
+        }
 
     //computing weakest preconditions
     def computeWP(com : Com, expr : Expr) : Expr =

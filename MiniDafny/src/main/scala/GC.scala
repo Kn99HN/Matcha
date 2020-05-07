@@ -25,7 +25,7 @@ object GC {
             case Nil => Unit
         }
 
-    def gendCondProgram(prog: List[Method]) : List[Com] = {
+    def genCondProgram(prog: List[Method]) : List[Com] = {
         var output = new ListBuffer[Com]()
         genFunctionMap(prog)
         genCondProgram(prog, output).toList
@@ -34,7 +34,9 @@ object GC {
     //changing ordering of appending later
     def genCondProgram(prog: List[Method], output: ListBuffer[Com]) : ListBuffer[Com] =
         (prog) match {
-            case (x :: xs) => (output += genCondProg(x)) ++ genCondProgram(xs, output) 
+            case (x :: xs) => 
+                (output += genCondProg(x))
+                genCondProgram(xs, output) 
             case Nil => output
         }
 
@@ -50,6 +52,7 @@ object GC {
                     ))
         }
 
+    //handling null cases
     def genCondBody(callerName: String, comm : Com) : Com = 
         (comm) match {
             case (Skip) => Assume (True)
@@ -77,7 +80,7 @@ object GC {
                             Assert(newPre),
                             Seq(
                                 Assume(newPostRet),
-                                Assign(name, Var (fresh))
+                                genCondBody(callerName, Assign(name, Var (fresh)))
                             )
                         )
                     }

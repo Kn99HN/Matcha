@@ -130,13 +130,18 @@ object print extends PrettyPrinter {
         "while" <+> parens(show(b)) <> 
            nest(line <> "invariant" <+> nest(show(inv))) <> line <>
            braces(nest(line <> show(c)) <> line)
-      case Method(p, _, _, req, c, ens) => 
-        "method" <+> p <>  
+      case Return(name) =>
+        "return" <+> name
+      case MethodApplication(p, args) =>
+        p <+> parens(ssep(args map (x => show(x)), ","))
+      case Method(p, args, ret, req, c, ens) => 
+        "method" <+> p <+> parens(ssep(args map (x => show(x)), ",")) <+>
+          "returns" <+> parens(show(ret)) <>
           nest(line <> "requires" <+> show(req) <> line <> "ensures" <+> show(ens)) <> 
             line <> braces(nest(line <> show(c)) <> line)
       case Program(p, methods) =>
         "program" <+> p <>
-          nest(line <> list(methods))
+          nest(line <> ssep(methods map (x => show(x)), ","))
     }
   }
   
