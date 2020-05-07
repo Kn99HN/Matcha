@@ -45,7 +45,6 @@ object parser{
 
         //generating guarded commands
         var gc = GC.genCondProgram(methods)
-        for(i <- gc) println(i.pretty + "\n")
         var wp = WP.computeWPs(gc)
 
         
@@ -53,7 +52,17 @@ object parser{
         for(i <- wp) negWP = UnOp(MyNot, i) :: negWP
         var vc = parseVC(negWP)
         var result = solver.testWithModel(vc)
-        println(result)
+
+        var counter = 0
+        for(i <- vc) {
+            var res = solver.testWithModel(i)
+            (res) match {
+                case (Sat (_)) => counter += 1
+                case(UnSat) => counter
+            }
+        }
+
+        println(counter)
 
         // var wp2 = UnOp(MyNot, wp)
         // var parsed2 = parse(wp2)
