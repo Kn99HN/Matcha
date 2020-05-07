@@ -22,7 +22,7 @@ object MiniDafny extends md.util.MDApp {
     if (debug) {
       parser.combineParse(prog)
       println("Parsed program:\n")
-      println(prog)
+      println(prog.pretty)
     }  
    
     handle(fail()) {
@@ -32,9 +32,3 @@ object MiniDafny extends md.util.MDApp {
     
   }
 } 
-
-// how to get message using solver
-// suppose P ^ !P, send to solver
-// Introduce a new boolean and conjunct with
-// the negated version
-// make it a procedural language

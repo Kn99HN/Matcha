@@ -29,8 +29,10 @@ object print extends PrettyPrinter {
       case Skip | Assign(_, _) | Assert(_) | Assume(_) | Havoc(_) => 16
       case Seq(_, _) | Choice(_, _) => 17
       case If(_, _, _) | While(_, _, _) => 18
-      case Method(_,_,_,_,_,_) => 19
-      case Program(_, _) => 20
+      case MethodApplication(_,_) => 19
+      case Return(_) => 20
+      case Method(_,_,_,_,_,_) => 21
+      case Program(_, _) => 22
     }
   
   /* Associativity of binary operators */
@@ -133,15 +135,15 @@ object print extends PrettyPrinter {
       case Return(name) =>
         "return" <+> name
       case MethodApplication(p, args) =>
-        p <+> parens(ssep(args map (x => show(x)), ","))
+        p <> parens(ssep(args map (x => show(x)), ","))
       case Method(p, args, ret, req, c, ens) => 
         "method" <+> p <+> parens(ssep(args map (x => show(x)), ",")) <+>
           "returns" <+> parens(show(ret)) <>
           nest(line <> "requires" <+> show(req) <> line <> "ensures" <+> show(ens)) <> 
             line <> braces(nest(line <> show(c)) <> line)
       case Program(p, methods) =>
-        "program" <+> p <>
-          nest(line <> ssep(methods map (x => show(x)), ","))
+        "program" <+> p <> ":\n" <>
+          nest(ssep(methods map (x => show(x)), "\n\n"))
     }
   }
   

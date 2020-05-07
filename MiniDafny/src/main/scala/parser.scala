@@ -40,12 +40,21 @@ object parser{
 
     def combineParse(prog: Program) : Unit = {
         val solver = Z3(UFLIA, "output.txt")
+
         var methods = prog.methods
+
+        //generating guarded commands
         var gc = GC.genCondProgram(methods)
         var wp = WP.computeWPs(gc)
-        // var gc = GC.genCondProgram(prog.methods : List[Method])
-        // var gc = GC.genCondProg(prog)
-        // var wp = WP.computeWP(gc, True)
+        
+        println("GC are \n")
+        for(i <- gc) println(i.pretty + "\n")
+        var negWP = List[Expr]()
+        for(i <- wp) negWP = UnOp(MyNot, i) :: negWP
+        var vc = parseVC(negWP)
+        var result = solver.testWithModel(vc)
+        println(result)
+
         // var wp2 = UnOp(MyNot, wp)
         // var parsed2 = parse(wp2)
 
@@ -132,10 +141,7 @@ object parser{
                         return ForAll(list, parse(e))
                     case MyExists => return SMTExists(convertList(xs), parse(e))
                 }
-            case (MethodApplication (name, args) => {
-                
-            })
-
+            case (expr) => parse(expr)
         }
 
     

@@ -59,6 +59,7 @@ object GC {
             case (Assign (name, expr)) =>
                 (expr) match {
                     case (MethodApplication (methodName, args)) => {
+                        println()
                         var callee = 
                             (functionMap.get(methodName)) match {
                                 case (Some (method)) => method
@@ -71,7 +72,7 @@ object GC {
                         var newPre = replaceExpression(callee.pre)
                         var fresh = getFreshVar(name)
                         var newPost = replaceExpression(callee.post)
-                        var ret = (caller.returnVal) match {
+                        var ret = (callee.returnVal) match {
                             case (Var (retName)) => retName
                             case (_) => ""
                         }
@@ -86,6 +87,7 @@ object GC {
                     }
                     case (_) => {
                         var freshName = getFreshVar(name)
+                        println(freshName)
                         Seq(
                             Assume(BinOp(Eq, Var (freshName), Var (name))),
                             Seq(

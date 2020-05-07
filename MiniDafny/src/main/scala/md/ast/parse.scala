@@ -13,7 +13,7 @@ object parse extends JavaTokenParsers {
     Set("true", "false", "skip",
         "assume", "assert", "havoc", 
         "if", "else", "while", 
-        "program", "requires", "ensures", "method", "returns", "return")
+        "program", "requires", "ensures", "method", "returns", "return", "modifies")
   
   def prog: Parser[Program] =
     positioned("program" ~> ident ~ methods ^^ {
