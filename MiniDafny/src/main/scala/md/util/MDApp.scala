@@ -8,7 +8,7 @@ abstract class MDApp extends App {
   def processFile(file: File)
   def init(): Unit = ()
   
-  case class Config(debug: Boolean = false, 
+  case class Config(debug: Boolean = false, verif: Boolean = false,
        files: List[File] = Nil)
   
   val usage = """MiniDafny Verifier
@@ -18,6 +18,8 @@ abstract class MDApp extends App {
             Print debug messages
       -h  | --help
             prints this usage text
+      -ve | --verify
+            verifying
       <file>...
             programs to be verified
     """
@@ -27,7 +29,10 @@ abstract class MDApp extends App {
     case (Some(c), "--debug") => Some(c.copy(debug = true))
     case (Some(c), "-h") => None
     case (Some(c), "--help") => None
-    case (Some(c), f) => Some(c.copy(files = c.files :+ new File(f)))
+    case (Some(c), "-ve") => Some(c.copy(verif = true))
+    case (Some(c), f) => 
+      println(c)
+      Some(c.copy(files = c.files :+ new File(f)))
     case (None, _) => None
   } getOrElse {
     println(usage)
@@ -36,6 +41,7 @@ abstract class MDApp extends App {
   }
      
   var debug: Boolean = config.debug
+  var verif: Boolean = config.verif
     
   var optFile: Option[File] = None 
   

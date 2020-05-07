@@ -1,4 +1,12 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/parser.scala:61:42: value ++ is not a member of Int[0m
-[0m[[0m[31merror[0m] [0m[0m                case (Sat (_)) => counter++[0m
-[0m[[0m[31merror[0m] [0m[0m                                         ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/md/util/MDApp.scala:34:10: constructor cannot be instantiated to expected type;[0m
+[0m[[0m[31merror[0m] [0m[0m found   : (T1, T2, T3)[0m
+[0m[[0m[31merror[0m] [0m[0m required: (Option[MDApp.this.Config], String)[0m
+[0m[[0m[31merror[0m] [0m[0m    case (Some(c), Some(d), f) => [0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/md/util/MDApp.scala:36:14: value copy is not a member of Any[0m
+[0m[[0m[31merror[0m] [0m[0m      Some(c.copy(files = c.files :+ new File(f)))[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/md/util/MDApp.scala:36:19: not found: value files[0m
+[0m[[0m[31merror[0m] [0m[0m      Some(c.copy(files = c.files :+ new File(f)))[0m
+[0m[[0m[31merror[0m] [0m[0m                  ^[0m
+[0m[[0m[31merror[0m] [0m[0mthree errors found[0m

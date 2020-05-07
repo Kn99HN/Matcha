@@ -48,6 +48,7 @@ object parser{
         var wp = WP.computeWPs(gc)
 
         
+        //transforming values in scala using for loop
         val negWP = for(i <- wp) yield UnOp(MyNot, i)
         var vc = parseVC(negWP)
         var result = solver.testWithModel(vc)

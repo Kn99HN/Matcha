@@ -215,3 +215,10 @@ clear
 run -d tests/myTest.mdf
 reload
 run -d tests/myTest.mdf
+run -ve tests/myTest.mdf
+run  tests/myTest.mdf
+run  -ve tests/myTest.mdf
+run -ve tests/myTest.mdf
+run -d tests/myTest.mdf
+run -v tests/myTest.mdf
+run -ve tests/myTest.mdf

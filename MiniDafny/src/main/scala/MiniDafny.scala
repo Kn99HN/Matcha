@@ -20,10 +20,16 @@ object MiniDafny extends md.util.MDApp {
     }
 
     if (debug) {
-      parser.combineParse(prog)
       println("Parsed program:\n")
       println(prog.pretty)
-    }  
+    }
+
+    if(verif) {
+      println("Verifying the following program:\n")
+      println(prog.pretty + "\n")
+      print("Number of invalid methods: ")
+      parser.combineParse(prog)
+    }   
    
     handle(fail()) {
       typeCheck(prog)

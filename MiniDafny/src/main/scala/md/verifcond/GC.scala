@@ -11,10 +11,10 @@ object GC {
     def True: Expr = BConst(true)
     def False: Expr = BConst(false) 
 
+
     /*
         - @TODO: create mapping for function names
     */
-
     def genFunctionMap(prog: List[Method]) : Unit = 
         (prog) match {
             case (x :: xs) => 
