@@ -213,3 +213,5 @@ clear
 reload
 clear
 run -d tests/myTest.mdf
+reload
+run -d tests/myTest.mdf

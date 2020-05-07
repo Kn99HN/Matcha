@@ -1,16 +1,16 @@
-[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:64:45: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:63:45: match may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: None[0m
 [0m[[0m[33mwarn[0m] [0m[0m                            (functionMap.get(methodName)) match {[0m
 [0m[[0m[33mwarn[0m] [0m[0m                                            ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:68:45: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:67:45: match may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: None[0m
 [0m[[0m[33mwarn[0m] [0m[0m                            (functionMap.get(callerName)) match {[0m
 [0m[[0m[33mwarn[0m] [0m[0m                                            ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:138:10: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:136:10: match may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: Nil[0m
 [0m[[0m[33mwarn[0m] [0m[0m        (progs) match {[0m
 [0m[[0m[33mwarn[0m] [0m[0m         ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:176:10: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/khanhnguyen/Documents/GitHub/Matcha/MiniDafny/src/main/scala/GC.scala:174:10: match may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: Nil[0m
 [0m[[0m[33mwarn[0m] [0m[0m        (modifiedVars) match {[0m
 [0m[[0m[33mwarn[0m] [0m[0m         ^[0m

@@ -59,7 +59,6 @@ object GC {
             case (Assign (name, expr)) =>
                 (expr) match {
                     case (MethodApplication (methodName, args)) => {
-                        println()
                         var callee = 
                             (functionMap.get(methodName)) match {
                                 case (Some (method)) => method
@@ -68,7 +67,7 @@ object GC {
                             (functionMap.get(callerName)) match {
                                 case (Some (caller)) => caller
                             }
-                        replaceExpression(caller, callee)
+                        replaceExpression(args, callee)
                         var newPre = replaceExpression(callee.pre)
                         var fresh = getFreshVar(name)
                         var newPost = replaceExpression(callee.post)
@@ -87,7 +86,6 @@ object GC {
                     }
                     case (_) => {
                         var freshName = getFreshVar(name)
-                        println(freshName)
                         Seq(
                             Assume(BinOp(Eq, Var (freshName), Var (name))),
                             Seq(
@@ -143,11 +141,11 @@ object GC {
         }
 
     //mapping all variables with its values
-    def replaceExpression(caller: Method, callee: Method) : Unit = {
-        var listCaller = caller.arguments
+    def replaceExpression(args: List[Expr], callee: Method) : Unit = {
         var listCallee = callee.arguments
-        (listCallee zip listCaller).map{
-            case(Var (name), AConst (value)) => funcVarMaps += (name -> value)
+        (listCallee zip args).map{
+            case(Var (name), AConst (value)) => 
+                funcVarMaps += (name -> value)
             case(_) => Unit
         }
     }

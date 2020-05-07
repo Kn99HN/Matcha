@@ -1,15 +1,14 @@
 program myTest
-method myTest(x,y) returns (z)
+method myTest(x) returns (z)
 requires x == 0
 ensures z == 2
 {
-  x := 1; 
   z := foo(2);
 }
 
 method foo(a) returns (b)
 requires a == 2
-ensures b == 2
+ensures b == 3
 {
-  x := 2;
+  b := 2;
 }

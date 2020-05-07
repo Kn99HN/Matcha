@@ -45,10 +45,10 @@ object parser{
 
         //generating guarded commands
         var gc = GC.genCondProgram(methods)
-        var wp = WP.computeWPs(gc)
-        
-        println("GC are \n")
         for(i <- gc) println(i.pretty + "\n")
+        var wp = WP.computeWPs(gc)
+
+        
         var negWP = List[Expr]()
         for(i <- wp) negWP = UnOp(MyNot, i) :: negWP
         var vc = parseVC(negWP)
