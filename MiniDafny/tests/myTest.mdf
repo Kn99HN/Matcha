@@ -1,4 +1,4 @@
-program myTest
+program test1
 method myTest(x) returns (z)
 requires x == 0
 ensures z == 0
@@ -8,7 +8,7 @@ ensures z == 0
 
 method foo(a) returns (b)
 requires a == 0
-ensures b == 0
+ensures b == 1
 { 
-  b := a;
+  b:= a + 1;
 }

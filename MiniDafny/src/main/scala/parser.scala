@@ -48,11 +48,9 @@ object parser{
         var wp = WP.computeWPs(gc)
 
         
-        var negWP = List[Expr]()
-        for(i <- wp) negWP = UnOp(MyNot, i) :: negWP
+        val negWP = for(i <- wp) yield UnOp(MyNot, i)
         var vc = parseVC(negWP)
         var result = solver.testWithModel(vc)
-
         var counter = 0
         for(i <- vc) {
             var res = solver.testWithModel(i)
