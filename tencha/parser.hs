@@ -73,7 +73,6 @@ program :: Program
 program = Program spec spec (Havoc ("x"))
 
 
-
 -- Pretty printer
 instance Show Bop where 
     show operation = show (pprBinOp operation)
@@ -103,7 +102,7 @@ pprBinOp Plus = "+"
 pprBinOp Minus = "-"
 pprBinOp Times = "*"
 pprBinOp Div = "/"
-pprBinOp Eq = "="
+pprBinOp Eq = "=="
 pprBinOp Ne = "!="
 pprBinOp Lt = "<"
 pprBinOp Gt = ">"
@@ -129,7 +128,6 @@ pprSpec :: Spec -> String
 pprSpec (Requires expr) = "assume " ++ pprExpr (expr)
 pprSpec (Ensure expr) = "assert " ++ pprExpr (expr)
 
-
 --finishing other cases
 pprCom :: Com -> String
 pprCom (Skip) = ""
@@ -142,3 +140,28 @@ pprProg :: Program -> String
 pprProg (Program spec1 spec2 com) = 
     "program" ++ pprSpec spec1 ++ "\n" ++ pprSpec spec2 ++ 
     "\n" ++ pprCom com
+
+-- type checker -> Very loosly defined
+
+data Type = TInt | TBool | TUnit
+
+-- missing Impl and Iff for now
+typ :: Expr -> Type 
+typ (AConst _) = TInt
+typ (BConst _) = TBool
+typ (Var _) = TUnit
+typ (BinOp operation _ _) 
+    | operation == Plus = TInt
+    | operation == Minus = TInt
+    | operation == Times = TInt
+    | operation == Div = TInt
+    | operation == Eq = TBool
+    | operation == Ne = TBool
+    | operation == Lt = TBool
+    | operation == Gt = TBool
+    | operation == Ge = TBool
+    | operation == And = TBool
+    | operation == Or = TBool
+typ (UnOp operation _) = 
+    | operation == UNot = TBool
+    | operation == UMinus = TInt
