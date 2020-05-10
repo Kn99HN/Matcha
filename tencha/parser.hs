@@ -10,17 +10,17 @@ data Expr =
         | Var String
         | BinOp Bop Expr Expr 
         | UnOp Uop Expr
-    deriving(Eq, Show)
+    deriving(Eq)
 
 data Bop = Plus | Minus | Times
         | Div | Eq | Ne
         | Lt | Gt | Ge
         | And | Or | Impl
         | Iff
-    deriving (Show, Eq)
+    deriving (Eq)
 
 data Uop = UNot | UMinus
-    deriving (Show, Eq)
+    deriving (Eq)
 
 plus, minus, times, div, eq, ne, lt :: Expr -> Expr -> Expr
 plus = BinOp Plus -- this is valid because Op Plus is type Expr, which has a function, that takse an Expr and return Expr -> Expr for us
@@ -40,7 +40,7 @@ unot = UnOp UNot
 uminus = UnOp UMinus
 
 example :: Expr
-example = times (plus (AConst 1) (AConst 2)) (AConst 3)
+example = times (AConst 3) (AConst 5)
 
 data Com =  Skip 
         | Assign String Expr
@@ -51,14 +51,14 @@ data Com =  Skip
         | Seq Com Com
         | If Expr Com Com
         | While Expr Expr Com
-        deriving(Show, Eq)
+        deriving(Eq)
 
 data Spec = Requires Expr
             | Ensure Expr
-        deriving(Show, Eq)
+        deriving(Eq)
 
-data Program = Program Spec Com
-        deriving(Show, Eq)
+data Program = Program Spec Spec Com
+        deriving(Eq)
 
 com :: Com
 com = Assign "x" example
@@ -70,7 +70,75 @@ spec :: Spec
 spec = (Requires pre)
 
 program :: Program
-program = Program spec (Havoc ("x"))
+program = Program spec spec (Havoc ("x"))
+
 
 
 -- Pretty printer
+instance Show Bop where 
+    show operation = show (pprBinOp operation)
+
+instance Show Uop where
+    show operation = show (pprUop operation)
+
+instance Show Expr where
+    show expr = show (pprExpr expr)
+
+instance Show Spec where 
+    show spec = show (pprSpec spec)
+
+instance Show Com where
+    show com = show (pprCom com)
+
+instance Show Program where
+    show program = show (pprProg program)
+    
+
+pprUop :: Uop -> String
+pprUop UNot = "!"
+pprUop UMinus = "-"
+
+pprBinOp :: Bop -> String
+pprBinOp Plus = "+"
+pprBinOp Minus = "-"
+pprBinOp Times = "*"
+pprBinOp Div = "/"
+pprBinOp Eq = "="
+pprBinOp Ne = "!="
+pprBinOp Lt = "<"
+pprBinOp Gt = ">"
+pprBinOp Ge = ">="
+pprBinOp And = "&&"
+pprBinOp Or = "|"
+pprBinOp Impl = "=>"
+pprBinOp Iff = "<=>"
+
+--ask edward
+pprExpr :: Expr -> String
+pprExpr = go (0 :: Int)
+    where go n e = paren n (go' e)
+          go' (BConst (bool))  = (11, show bool)
+          go' (AConst (value)) = (10, show value) 
+          go' (Var (name))      = (9, name)
+          go' (BinOp operation e1 e2)  = (6, go 5 e1 ++ " " ++ pprBinOp operation ++ " " ++ go 6 e2)
+          go' (UnOp operation e) = (3, pprUop operation ++ go 2 e)
+          paren n (m, s) | m > n     = s
+                         | otherwise = "(" ++ s ++ ")"
+
+pprSpec :: Spec -> String
+pprSpec (Requires expr) = "assume " ++ pprExpr (expr)
+pprSpec (Ensure expr) = "assert " ++ pprExpr (expr)
+
+
+--finishing other cases
+pprCom :: Com -> String
+pprCom (Skip) = ""
+pprCom (Assign name expr) = name ++ " := " ++ pprExpr expr ++ ";"
+pprCom (Havoc name) = "havoc " ++ name
+pprCom (Assume expr) = "assume " ++ pprExpr expr
+pprCom (Assert expr) = "assert " ++ pprExpr expr
+
+pprProg :: Program -> String
+pprProg (Program spec1 spec2 com) = 
+    "program" ++ pprSpec spec1 ++ "\n" ++ pprSpec spec2 ++ 
+    "\n" ++ pprCom com
