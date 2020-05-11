@@ -1,9 +1,44 @@
 module Parser where 
 
+import System.IO
+import Control.Monad
+import Text.ParserCombinators.Parsec
+import Text.ParserCombinators.Parsec.Expr
+import Text.ParserCombinators.Parsec.Language
+import qualified Text.ParserCombinators.Parsec.Token as Token
+
+
+-- Defining Lexer using combinator library in Haskell
+languageDef =
+    emptyDef {
+        Token.commentStart = "/*",
+        Token.commentEnd = "*/",
+        Token.commentLine = "//",
+        Token.identStart = letter,
+        Token.identLetter = alphaNum,
+        Token.reservedNames = ["if", "then", "true", "false",
+                                "skip", "assume", "assert", "havoc",
+                                "while", "program", "requires", "ensures"],
+        Token.reservedOpNames = ["+", "-", "*", "/", ":=", "<", 
+                                ">", "<=", ">=", "!", "&&", "||", "=>", "<=>"]
+                        
+    }
+
+lexer = Token.makeTokenParser languageDef
+identifier = Token.identifier lexer
+reserved = Token.reserved lexer
+parens = Token.parens lexer
+integer = Token.integer lexer
+semi = Token.semi lexer
+whitespace = Token.whiteSpace lexer 
+
+-- parsing trailing white space
+-- whileParser :: Parser Com
+-- whileParser = whitespace >> com
+
 {-
     Defining expression data types
 -}
-
 data Expr = 
           AConst Int
         | BConst Bool
@@ -145,23 +180,3 @@ pprProg (Program spec1 spec2 com) =
 
 data Type = TInt | TBool | TUnit
 
--- missing Impl and Iff for now
-typ :: Expr -> Type 
-typ (AConst _) = TInt
-typ (BConst _) = TBool
-typ (Var _) = TUnit
-typ (BinOp operation _ _) 
-    | operation == Plus = TInt
-    | operation == Minus = TInt
-    | operation == Times = TInt
-    | operation == Div = TInt
-    | operation == Eq = TBool
-    | operation == Ne = TBool
-    | operation == Lt = TBool
-    | operation == Gt = TBool
-    | operation == Ge = TBool
-    | operation == And = TBool
-    | operation == Or = TBool
-typ (UnOp operation _) = 
-    | operation == UNot = TBool
-    | operation == UMinus = TInt
