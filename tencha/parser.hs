@@ -6,7 +6,7 @@ import Text.ParserCombinators.Parsec
 import Text.ParserCombinators.Parsec.Expr
 import Text.ParserCombinators.Parsec.Language
 import qualified Text.ParserCombinators.Parsec.Token as Token
-
+import Text.ParserCombinators.Parsec
 
 -- Defining Lexer using combinator library in Haskell
 languageDef =
@@ -26,15 +26,36 @@ languageDef =
 
 lexer = Token.makeTokenParser languageDef
 identifier = Token.identifier lexer
-reserved = Token.reserved lexer
+reservedOp = Token.reserved lexer
 parens = Token.parens lexer
 integer = Token.integer lexer
 semi = Token.semi lexer
-whitespace = Token.whiteSpace lexer 
+whitespace = Token.whiteSpace lexer
+
 
 -- parsing trailing white space
--- whileParser :: Parser Com
--- whileParser = whitespace >> com
+whileParser :: Parser Com
+whileParser = whitespace >> com
+
+com :: Parser Com
+com = parens com <|> sequenceOfCom
+
+sequenceOfCom =
+    do 
+        list <- (sepBy1 com' semi) 
+        return $ if length list == 1 then head list else Seq list
+
+-- Adding other command parser later
+com' :: Parser Com
+com' = assignCom
+
+assignCom :: Parser Com
+assignCom = 
+    do 
+        variable <- identifier
+        reservedOp ":="
+        -- expr <= 
+        return $ Assign variable (AConst 1)
 
 {-
     Defining expression data types
@@ -83,7 +104,7 @@ data Com =  Skip
         | Assume Expr
         | Assert Expr
         | Choice Com Com
-        | Seq Com Com
+        | Seq [Com]
         | If Expr Com Com
         | While Expr Expr Com
         deriving(Eq)
@@ -95,8 +116,6 @@ data Spec = Requires Expr
 data Program = Program Spec Spec Com
         deriving(Eq)
 
-com :: Com
-com = Assign "x" example
 
 pre :: Expr
 pre = ge (Var ("x")) (AConst 0)
