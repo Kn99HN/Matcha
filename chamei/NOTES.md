@@ -8,3 +8,7 @@ This is my lightweight implementation of DPLL-based SAT Solver in Python.
 - M is grown by:
     - deducing the truth value of literal from M and F
     - guessing a truth value
+
+- If a wrong guess for a literal leads to an inconsistency, the procedure
+backtracks and tries the opposite value
+
