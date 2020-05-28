@@ -1,4 +1,39 @@
+########################################
+#   Handle interpretation
+########################################
+def dpll(clauses, assignments = {}):
+    if len(clauses) == 0: return True, assignments
+    elif any([len(c) == 0 for c in clauses]):
+        return False, None
 
+    l = select_literal(clauses)
+    new_clauses = []
+    for c in clauses:
+        if (l, True) not in c:
+            new_clauses.append(c)
+    for c in new_clauses:
+        new_clauses.remove(c)
+        new_clauses.append(c.difference({(l, False)}))
+    assignments[l] = True
+    sat, assignments = dpll(new_clauses, assignments)
+    if sat:
+        return sat, assignments
+    
+    assignments = {}
+    new_clauses = [c for c in clauses if (l, False) not in c]
+    for c in new_clauses:
+        new_clauses.remove(c)
+        new_clauses.append(c.difference({(l, True)}))
+    assignments[l] = False
+    sat, assignments = dpll(new_clauses, assignments)
+    if sat:
+        return sat, assignments
+    return False, None
+
+
+########################################
+#    Helper Functions
+########################################
 def pretty_print(clauses):
     conjunct = ""
     for (i, c) in enumerate(clauses):
@@ -12,38 +47,16 @@ def pretty_print(clauses):
                     conjunct += " || "
         if i != len(clauses):
             conjunct += " && "
-    print(conjunct)
-
-def interp(clauses, assignments = {}):
-    if len(clauses) == 0: return True, assignments
-    elif any([len(c) == 0 for c in clauses]):
-        return False, None
-
-    l = select_literal(clauses)
-    new_clauses = []
-    for c in clauses:
-        if (l, True) not in c:
-            new_clauses.append(c)
-    new_cnf = [c for c in clauses if (l, True) not in c]
-    new_cnf = [c.difference({(l, False)}) for c in new_cnf]
-    for c in new_clauses:
-        new_clauses.remove(c)
-        new_clauses.append(c.difference({(l, False)}))
-    assignments.add((l, True))
-    sat = interp(new_clauses, assignments)
-
-    # Handle the cases when it is not satisfiable
-    if sat is not None:
-        print(sat[0])
-        
+    return conjunct
 
 def select_literal(clauses):
     for c in clauses:
         for literal in c:
             return literal[0]
 
-
-
+########################################
+#    Opening Files Functions
+########################################
 file = open("test.txt", "r")
 with file as f: 
     content = [line.rstrip() for line in f]
@@ -57,7 +70,6 @@ with file as f:
             clause = set()
             for val in values:
                 if val is not '0':
-                    # literal = (int(val) * (-1), int(val) > 0)
                     value = int(val)
                     if value < 0:
                         literal = ('' + str(int(val) * -1), False)
@@ -65,6 +77,5 @@ with file as f:
                         literal = (val, True)
                     clause.add(literal)
             clauses.append(clause)
-    interp(clauses, set())
-
-                
+    print("The clauses are: " + pretty_print(clauses))
+    print(dpll(clauses))
