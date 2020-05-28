@@ -6,3 +6,4 @@ def select_literals(clauses):
 
 # finding if any clause has all but one values are false 
 # def unit_prop(clauses) 
+
