@@ -24,11 +24,14 @@ def CDCL(F, G):
     return true
 '''
 
+# Change this to be more pythonic
 def all_variables_assigned(formulas, graph):
-    for clause in formulas:
-        for lit in clause:
-            if lit[1] == "undefined":
-                return True
+    for i in formulas:
+        ls = formulas.get(i)
+        for clause in ls:
+            for lit in clause:
+                if lit[1] == "undefined": 
+                    return True
     return False
 
 def decide(formulas, graph):
