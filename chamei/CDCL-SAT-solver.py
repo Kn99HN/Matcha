@@ -1,5 +1,49 @@
-import json
-import logging
+class IGraph:
+    def __init__(self):
+        graph = {}
+        history = []
+        self.graph = graph
+        self.history = history
+        
+    def add(self, node):
+        contain = False
+        for key in self.graph:
+            if key.name == node.name:
+                contain = True
+            elif "-" + key.name == node.name:
+                contain = True
+
+        if not contain:
+            self.graph[node] = []
+    
+    def add_edge(self, node, clause):
+        for cl in clause:
+            self.graph.add(node)
+            edge = get_edge(self, cl)
+            if edge:
+                self.graph.get(edge).append(cl)
+            self.history.append(cl)
+        self.history.append(node)
+    
+    def get_edge(self, node):
+        for key in self.graph:
+            if key.name == node.name:
+                return key
+            elif "-" + key.name == node.name:
+                return key
+        return None
+
+    def __str__(self):
+        output = ""
+        for vertex in self.graph:
+            output += vertex.__str__() + " :{ "
+            edges = self.graph.get(vertex)
+            for edge in edges:
+                output += edge.__str__() + " , "
+            
+            output += " } \n"
+        return output
+
 
 class Node: 
     def __init__(self, name, value, dl, antecedent, negate):
@@ -10,9 +54,8 @@ class Node:
         self.negate = negate
     
     def __str__(self):
-        # return "(" + self.name + "," + self.value + "," + self.dl + "," + self.antecedent + ")"
-        return "(Var: " + self.name + ")"
-
+        return "(" + self.name + "," + str(self.value) + "," + str(self.dl) + "," + str(self.antecedent) + "," + str(self.negate) + ")"
+    
 # Change to None later
 file = open("test.txt", "r")
 with file as f: 
@@ -47,96 +90,132 @@ with file as f:
                     else:
                         literals[lit] = [counter]
             counter += 1
-    
-    # print(formula)
-    # print(literals)
 
 def has_unassigned_var(formula):
-    for clause in formula:
+    for cl in formula:
+        clause = formula.get(cl)
         for lit in clause:
             if lit.value == None:
                 return True
     return False
 
 
-def select_literals(formula, literals):
+def decide(formula, literals):
     for lit in literals:
         ls = literals.get(lit)
         for idx in ls:
             clause = formula.get(idx)
-            for l in clause:
-                if l.value == None:
-                    return lit
-
-# working on the logic of this
-# Handle the case when the value is none or we can delegate that to undefined variables.
-def check_unit(formula, literal):
-    non_unit = False
-    for lit in literal:
-        ls = literal.get(lit)
-        print("Checking unit is selecting a literal: " + lit)
-        for idx in ls:
-            print("index is: " + str(idx))
-            clause = formula.get(idx)
-            unassigned_val = None
-            counter = 0
             for node in clause:
-                if (node.value == True and node.negate == False) or (node.value == False and node.negate == True):
-                    non_unit = True
-                if (node.value == False and node.negate == False) or (node.value == True and node.negate == True):
-                    counter += 1
                 if node.value == None:
-                    unassigned_val = node.name
-                    if '-' in unassigned_val:
-                        unassigned_val = unassigned_val.split('-')[1]
-                        
-            if non_unit:
-                return False, None
-                
-            if counter == (len(clause) - 1):
-                print("Counter is: " + str(counter))
-                return True, unassigned_val
-    return False, None
+                    node.value = False
+                    return node
 
-# working on the logic of this
-def unit_prop(formula, literals):
+def back_track_level(formula, literals, conflic_clause_idx, conflict_level, graph):
+    conflict_clause = formula.get(conflic_clause_idx)
+    new_clause = {}
+    p = None
+    for lit in conflict_clause:
+        if lit.level == conflict_level: 
+            p = lit
+        else:
+            new_clause.add(lit)
+
+    max_lv = -1
+    for cl in new_clause:
+        max_lv = max(max_lv, cl.dl)
+
+    return max_lv
+
+
+# for f in formula:
+#     clause = formula.get(f)
+#     output = ""
+#     for c in clause:
+#         if c.name == "-1": c.value = True
+
+
+def print_formula(formula):
+    for f in formula:
+        output = "clause " + str(f) + ": "
+        clause = formula.get(f)
+        for cl in clause:
+            output += cl.__str__() + " "
+        print(output)
+
+    
+# print(CDCL(formula, literals))
+print("There are unassigned variable: " + str(has_unassigned_var(formula)))
+
+'''
+    Checking if an unit clause exists in the formula.
+    If there is one return True and the unassigned value
+    name. Otherwise, False and None
+'''
+def check_unit(formula, literal):
+    for lit in literal:
+        cl = literal.get(lit)
+        false_counter = 0
+        unassigned_val = None
+        for idx in cl:
+            clause = formula.get(idx)
+            for variable in clause:
+                if(variable.value == True and variable.negate == False) or (variable.value == False and variable.negate == True):
+                    return "UNRESOLVED", None
+                if (variable.value == False and variable.negate == False) or (variable.value == True and variable.negate == True):
+                    false_counter += 1
+                elif (variable.value == None):
+                    if '-' in variable.name:
+                        unassigned_val = variable.name.split('-')[1]
+                    else:
+                        unassigned_val = variable.name
+            if false_counter == len(clause):
+                return "CONFLICT", None
+            if false_counter == (len(clause) - 1):
+                return True, unassigned_val
+    return "UNRESOLVED", None
+                
+print("Formula containing unit clause: " + str(check_unit(formula, literals)))
+
+def unit_propagate(formula, literals, graph, dl):
     contain_unit, unassigned_lit = check_unit(formula, literals)
-    while contain_unit:
+    while contain_unit == True:
         ls = literals.get(unassigned_lit)
-        print("Unit propagating for literal: " + unassigned_lit)
+        print("Unit propagating for literal: " + str(unassigned_lit))
         for idx in ls:
             clause = formula.get(idx)
             counter = 0
+            new_clause = {}
             for c in clause:
+                if c.name != unassigned_lit:
+                    new_clause.add(c)
                 if c.name == unassigned_lit: 
                     c.value = True
+                    node = Node(unassigned_lit, True, dl,idx, False)
                 elif c.name == ("-" + unassigned_lit): 
                     c.value = False
+                    node = Node(unassigned_lit, True, dl,idx, False)
                 if (c.value == False and c.negate == False) or (c.value == True and c.negate == True):
                     counter += 1
-                if counter == len(clause):
-                    return "CONFLICT"
-                #else invoke graph, handle negated value specially
+            graph.add_edge(node, new_clause)
+            if counter == len(clause):
+                return "CONFLICT"
+        print("After propagating: ")
+        print_formula(formula)
         contain_unit, unassigned_lit = check_unit(formula, literals)
-    return "UNRESOLVED"
+    return contain_unit
+
+
+def CDCL(formula, literals):
+    graph = IGraph()
+    if unit_propagate(formula, literals, graph, -1) == "CONFLICT": return False
+    level = 0
+    while has_unassigned_var(formula):
+        level += 1
+        node = decide(formula, literals)
+        graph.add(node)
+        # while unit_propagate(formula, literals) == "CONFLICT":
     
+    print(graph.__str__())
+    return True
 
-for f in formula:
-    clause = formula.get(f)
-    output = ""
-    for c in clause:
-        if c.name == "-1": c.value = False
-        output += "(" + c.name + " ,val: " + str(c.value) + " ,negation: " + str(node.negate) + ")"
-    print(str(f) + ": " + output)
-
-print(literals)
-
-unit_prop(formula, literals)
-
-for f in formula:
-    clause = formula.get(f)
-    output = ""
-    for c in clause:
-        output += c.name + " ,val: " + str(c.value) + "; "
-    print(str(f) + ": " + output)
-    
+CDCL(formula, literals)
