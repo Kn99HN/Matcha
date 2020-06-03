@@ -4,6 +4,15 @@ class IGraph:
         history = []
         self.graph = graph
         self.history = history
+
+            
+    def get_edge(self, node):
+        for key in self.graph:
+            if key.name == node.name:
+                return key
+            elif "-" + key.name == node.name:
+                return key
+        return None
         
     def add(self, node):
         contain = False
@@ -12,9 +21,24 @@ class IGraph:
                 contain = True
             elif "-" + key.name == node.name:
                 contain = True
-
+        
         if not contain:
-            self.graph[node] = []
+            if "-" in node.name:
+                new_node = Node(node.name.split("-")[1], not node.value, node.dl, node.antecedent, False)
+                self.graph[new_node] = []
+            else:
+                self.graph[node] = []
+            
+
+
+        # for key in self.graph:
+        #     if key.name == node.name:
+        #         contain = True
+        #     elif "-" + key.name == node.name:
+        #         contain = True
+
+        # if not contain:
+        #     self.graph[node] = []
     
     def add_edge(self, node, clause):
         for cl in clause:
@@ -24,14 +48,6 @@ class IGraph:
                 self.graph.get(edge).append(cl)
             self.history.append(cl)
         self.history.append(node)
-    
-    def get_edge(self, node):
-        for key in self.graph:
-            if key.name == node.name:
-                return key
-            elif "-" + key.name == node.name:
-                return key
-        return None
 
     def __str__(self):
         output = ""
@@ -213,9 +229,15 @@ def CDCL(formula, literals):
         level += 1
         node = decide(formula, literals)
         graph.add(node)
-        # while unit_propagate(formula, literals) == "CONFLICT":
+        print(unit_propagate(formula, literals, graph, level))
     
     print(graph.__str__())
     return True
 
-CDCL(formula, literals)
+if CDCL(formula, literals):
+    print("Formula is SAT")
+else:
+    print("Formula is UNSAT")
+
+print("After running CDCL: ")
+print_formula(formula)
