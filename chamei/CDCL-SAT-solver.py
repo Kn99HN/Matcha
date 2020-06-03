@@ -67,33 +67,38 @@ def select_literals(formula, literals):
             for l in clause:
                 if l.value == None:
                     return lit
-    
+
+# working on the logic of this
+# Handle the case when the value is none or we can delegate that to undefined variables.
 def check_unit(formula, literal):
-    counter = 0
     non_unit = False
     for lit in literal:
         ls = literal.get(lit)
         print("Checking unit is selecting a literal: " + lit)
         for idx in ls:
+            print("index is: " + str(idx))
             clause = formula.get(idx)
             unassigned_val = None
+            counter = 0
             for node in clause:
                 if (node.value == True and node.negate == False) or (node.value == False and node.negate == True):
                     non_unit = True
-                if node.value == False:
+                if (node.value == False and node.negate == False) or (node.value == True and node.negate == True):
                     counter += 1
                 if node.value == None:
                     unassigned_val = node.name
                     if '-' in unassigned_val:
                         unassigned_val = unassigned_val.split('-')[1]
-            if counter == (len(clause) - 1):
-                return True, unassigned_val
+                        
             if non_unit:
-                for node in clause:
-                    if node.value == None:
-                        node.value = False
+                return False, None
+                
+            if counter == (len(clause) - 1):
+                print("Counter is: " + str(counter))
+                return True, unassigned_val
     return False, None
 
+# working on the logic of this
 def unit_prop(formula, literals):
     contain_unit, unassigned_lit = check_unit(formula, literals)
     while contain_unit:
@@ -120,8 +125,8 @@ for f in formula:
     clause = formula.get(f)
     output = ""
     for c in clause:
-        output += c.__str__()
-        if c.name == "-1": c.value = True
+        if c.name == "-1": c.value = False
+        output += "(" + c.name + " ,val: " + str(c.value) + " ,negation: " + str(node.negate) + ")"
     print(str(f) + ": " + output)
 
 print(literals)
