@@ -32,9 +32,25 @@ class IGraph:
     def add_edge(self, node, clause):
         for cl in clause:
             self.add(node)
-            edge = self.get_edge(cl)
-            if edge:
-                self.graph.get(edge).append(cl)
+            for key in self.graph:
+                if key.name == cl.name:
+                    ls = self.graph.get(key)
+                    for lit in ls:
+                        if lit.name != node.name or "-" + lit.name != node.name or lit.name != "-" + node.name:
+                            self.graph.get(key).append(node)
+                elif "-" + key.name == cl.name:
+                    ls = self.graph.get(key)
+                    for lit in ls:
+                        if lit.name != node.name or "-" + lit.name != node.name or lit.name != "-" + node.name:
+                            self.graph.get(key).append(node)
+                elif key.name == "-" + cl.name:
+                    ls = self.graph.get(key)
+                    for lit in ls:
+                        if lit.name != node.name or "-" + lit.name != node.name or lit.name != "-" + node.name:
+                            self.graph.get(key).append(node)
+            # edge = self.get_edge(node)
+            # if edge:
+            #     self.graph.get(cl).append(node)
             self.history.append(cl)
         self.history.append(node)
 
@@ -149,8 +165,6 @@ def print_formula(formula):
             output += cl.__str__() + " "
         print(output)
 
-print("There are unassigned variable: " + str(has_unassigned_var(formula)))
-
 '''
     Checking if an unit clause exists in the formula.
     If there is one return True and the unassigned value
@@ -164,9 +178,9 @@ def check_unit(formula, literal):
         for idx in cl:
             clause = formula.get(idx)
             for variable in clause:
-                if(variable.value == True and variable.negate == False) or (variable.value == False and variable.negate == True):
+                if(variable.value == True and variable.negate == False):
                     return "UNRESOLVED", None
-                if (variable.value == False and variable.negate == False):
+                if variable.value == False:
                     false_counter += 1
                 elif (variable.value == None):
                     if '-' in variable.name:
@@ -179,7 +193,6 @@ def check_unit(formula, literal):
                 return True, unassigned_val
     return "UNRESOLVED", None
                 
-print("Formula containing unit clause: " + str(check_unit(formula, literals)))
 
 def unit_propagate(formula, literals, graph, dl):
     contain_unit, unassigned_lit = check_unit(formula, literals)
@@ -187,24 +200,34 @@ def unit_propagate(formula, literals, graph, dl):
         print("Before propagating:")
         print_formula(formula)
         ls = literals.get(unassigned_lit)
+        if not ls: return "UNRESOLVED", None
         print("Unit propagating for literal: " + str(unassigned_lit))
         for idx in ls:
+            added = False
             clause = formula.get(idx)
             counter = 0
             new_clause = set()
             for c in clause:
-                if c.name != unassigned_lit:
+                if c.name != unassigned_lit and ("-" + c.name) != unassigned_lit and c.name != ("-" + unassigned_lit):
+                    c.dl = dl
                     new_clause.add(c)
                 if c.name == unassigned_lit: 
                     c.value = True
+                    c.dl = dl
                     node = Node(unassigned_lit, True, dl,idx, False)
+                    added = not added
                 elif c.name == ("-" + unassigned_lit): 
-                    c.value = False
+                    c.value = True
+                    c.dl = dl
                     node = Node(unassigned_lit, True, dl,idx, False)
+                    added = not added
                 if (c.value == False and c.negate == False) or (c.value == True and c.negate == True):
                     counter += 1
-            print("Adding node: " + node.__str__())
-            graph.add_edge(node, new_clause)
+            if added:
+                graph.add_edge(node, new_clause)
+
+            print("Graph layout is: ")
+            print(graph.__str__())
             if counter == len(clause):
                 return "CONFLICT"
         print("After propagating: ")
@@ -221,6 +244,7 @@ def CDCL(formula, literals):
     while has_unassigned_var(formula):
         level += 1
         node = decide(formula, literals)
+        node.dl = level
         for idx in formula:
             clause = formula.get(idx)
             for cl in clause:
