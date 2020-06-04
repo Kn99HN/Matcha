@@ -29,21 +29,10 @@ class IGraph:
             else:
                 self.graph[node] = []
             
-
-
-        # for key in self.graph:
-        #     if key.name == node.name:
-        #         contain = True
-        #     elif "-" + key.name == node.name:
-        #         contain = True
-
-        # if not contain:
-        #     self.graph[node] = []
-    
     def add_edge(self, node, clause):
         for cl in clause:
-            self.graph.add(node)
-            edge = get_edge(self, cl)
+            self.add(node)
+            edge = self.get_edge(cl)
             if edge:
                 self.graph.get(edge).append(cl)
             self.history.append(cl)
@@ -123,6 +112,7 @@ def decide(formula, literals):
             clause = formula.get(idx)
             for node in clause:
                 if node.value == None:
+                    print("Selecting literal: " + node.name)
                     node.value = False
                     return node
 
@@ -148,6 +138,7 @@ def back_track_level(formula, literals, conflic_clause_idx, conflict_level, grap
 #     output = ""
 #     for c in clause:
 #         if c.name == "-1": c.value = True
+#         if c.name == "-3": c.value = True
 
 
 def print_formula(formula):
@@ -158,8 +149,6 @@ def print_formula(formula):
             output += cl.__str__() + " "
         print(output)
 
-    
-# print(CDCL(formula, literals))
 print("There are unassigned variable: " + str(has_unassigned_var(formula)))
 
 '''
@@ -177,7 +166,7 @@ def check_unit(formula, literal):
             for variable in clause:
                 if(variable.value == True and variable.negate == False) or (variable.value == False and variable.negate == True):
                     return "UNRESOLVED", None
-                if (variable.value == False and variable.negate == False) or (variable.value == True and variable.negate == True):
+                if (variable.value == False and variable.negate == False):
                     false_counter += 1
                 elif (variable.value == None):
                     if '-' in variable.name:
@@ -195,12 +184,14 @@ print("Formula containing unit clause: " + str(check_unit(formula, literals)))
 def unit_propagate(formula, literals, graph, dl):
     contain_unit, unassigned_lit = check_unit(formula, literals)
     while contain_unit == True:
+        print("Before propagating:")
+        print_formula(formula)
         ls = literals.get(unassigned_lit)
         print("Unit propagating for literal: " + str(unassigned_lit))
         for idx in ls:
             clause = formula.get(idx)
             counter = 0
-            new_clause = {}
+            new_clause = set()
             for c in clause:
                 if c.name != unassigned_lit:
                     new_clause.add(c)
@@ -212,11 +203,13 @@ def unit_propagate(formula, literals, graph, dl):
                     node = Node(unassigned_lit, True, dl,idx, False)
                 if (c.value == False and c.negate == False) or (c.value == True and c.negate == True):
                     counter += 1
+            print("Adding node: " + node.__str__())
             graph.add_edge(node, new_clause)
             if counter == len(clause):
                 return "CONFLICT"
         print("After propagating: ")
         print_formula(formula)
+        print("----------------------------")
         contain_unit, unassigned_lit = check_unit(formula, literals)
     return contain_unit
 
@@ -228,9 +221,19 @@ def CDCL(formula, literals):
     while has_unassigned_var(formula):
         level += 1
         node = decide(formula, literals)
+        for idx in formula:
+            clause = formula.get(idx)
+            for cl in clause:
+                if cl.name == node.name:
+                    cl.value = node.value
+                elif "-" + cl.name == node.name:
+                    cl.value = not node.value
+                elif cl.name == "-" + node.name:
+                    cl.value = not node.value
         graph.add(node)
-        print(unit_propagate(formula, literals, graph, level))
-    
+        res = unit_propagate(formula, literals, graph, level)
+        # if res == "CONFLICT":
+        #     graph.remove()
     print(graph.__str__())
     return True
 
