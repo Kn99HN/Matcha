@@ -232,6 +232,7 @@ def backtrack(formula, literals, graph, conflict_node, back_level):
     graph.remove(conflict_node)
 
 
+# Currently missing backtrack level step
 def CDCL(formula, literals):
     graph = IGraph()
     dl = 0
