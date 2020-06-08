@@ -1,3 +1,41 @@
+class IGraph:
+    def __init__(self):
+        graph_dict = {}
+        history = set()
+        self.graph_dict = graph_dict
+        self.history = history
+
+    def exist(self, node):
+        for curr_node in self.graph_dict:
+            if curr_node.name == node.name or "-" + curr_node.name == node.name or curr_node.name == "-" + node.name:
+                return True
+        return False
+
+    def add_node(self, node):
+        if not self.exist(node):
+            self.graph_dict[node] = []
+    
+    def add_vertices(self, node, clause):
+        if not self.exist(node):
+            self.add_node(node)
+        for lit in clause:
+            if lit.name != node.name:
+                for val in self.graph_dict:
+                    if val.name == lit.name:
+                        self.graph_dict.get(val).append(node)
+    
+    def __str__(self):
+        output = ""
+        for vertex in self.graph_dict:
+            output += vertex.__str__() + " :{ "
+            edges = self.graph_dict.get(vertex)
+            for edge in edges:
+                output += edge.__str__() + ", "
+            
+            output += "} \n"
+        return output
+        
+
 class Node: 
     def __init__(self, name, value, dl, antecedent, negate):
         self.name = name
@@ -43,7 +81,7 @@ def decide(formula):
     for clause in formula:
         for lit in clause:
             if lit.value == None:
-                lit.value = True
+                lit.value = False # change back to True later
                 return lit
 
 # Given a node, updating all the value in formula
@@ -67,31 +105,76 @@ def has_unassigned(formula):
 def check_unit(formula):
     for (idx, clause) in enumerate(formula):
         counter = 0
+        node = None
         for cl in clause:
             if cl.value == True:
+                counter = len(clause) + 1
                 break
             if cl.value == False:
                 counter += 1
-        
+    
         if counter == len(clause):
             return "CONFLICT", idx
         elif counter == len(clause) - 1:
             return "UNIT", idx
     return "UNRESOLVED", -1
 
+# Unit propagation. If any of the clause has all but one false value then it can be inferred that the 
+# last unassigned value must be True. If so, we add it to the implication graph
+def unit_prop(formula, graph, dl):
+    is_unit, idx = check_unit(formula)
+    while is_unit == "UNIT":
+        clause = formula[idx]
+        unassigned_lit = None
+        for lit in clause:
+            if lit.value == None:
+                lit.value = True
+                unassigned_lit = lit
+                lit.dl = dl
+                lit.antecedent = idx
+        graph.add_vertices(lit, clause)
+        update_formula(unassigned_lit, formula)
+        is_unit, idx = check_unit(formula)
+    return is_unit
+
+# Last Literal Assigned at Level d
+def lastAssignedAtLevel(d, levels):
+    clause = levels.get(d)
+    return clause.get(len(clause) - 1)
+
+# Resolving means: (x1 | x2 | x3) (~x1 | ~x2 | x3) => x3 since x1 and ~x1 cancels each other out
+def resolve(first_cl, second_cl, value):
+    new_clause = []
+    # for first_lit in first_cl:
+    #     for second_lit in second_cl:
+    #         if first_lit.name == second_lit.name:
+    #             new_clause.append(first_lit)
+    #         if first_lit.name != second_lit.name:
+    #             new_clause.append(first)
+
+# Sole Lit At Level d is the only lit at level d
+def soleLitAtLevel(s, clause, dl):
+    counter = 0
+    for lit in clause:
+        if lit.dl == dl:
+            counter += 1
+    return counter == 1
     
-# print("Before:")
-# print_formula(formula)
-# node = decide(formula)
-# update_formula(node, formula)
-# print("After 1 decision:")
-# print_formula(formula)
-# node = decide(formula)
-# update_formula(node, formula)
-# print("After 2 decision:")
-# print_formula(formula)
-# node = decide(formula)
-# update_formula(node, formula)
-# print("After 3 decision:")
-# print_formula(formula)
-# print(check_unit(formula))
+
+def CDCL(formula):
+    graph = IGraph()
+    level = 0
+    if unit_prop(formula, graph, level) == "CONFLICT": return False
+    while has_unassigned(formula):
+        level += 1
+        node = decide(formula)
+        update_formula(node, formula)
+        graph.add_node(node)
+    return True
+    
+
+print(CDCL(formula))
+
+
+
+        
