@@ -105,19 +105,20 @@ def has_unassigned(formula):
 def check_unit(formula):
     for (idx, clause) in enumerate(formula):
         counter = 0
-        node = None
+        conflict_node = None
         for cl in clause:
             if cl.value == True:
                 counter = len(clause) + 1
                 break
             if cl.value == False:
                 counter += 1
+                conflict_node = cl
     
         if counter == len(clause):
-            return "CONFLICT", idx
+            return "CONFLICT", idx, conflict_node
         elif counter == len(clause) - 1:
-            return "UNIT", idx
-    return "UNRESOLVED", -1
+            return "UNIT", idx, None
+    return "UNRESOLVED", -1, None
 
 # Unit propagation. If any of the clause has all but one false value then it can be inferred that the 
 # last unassigned value must be True. If so, we add it to the implication graph
@@ -135,7 +136,7 @@ def unit_prop(formula, graph, dl):
         graph.add_vertices(lit, clause)
         update_formula(unassigned_lit, formula)
         is_unit, idx = check_unit(formula)
-    return is_unit
+    return is_unit, 
 
 # Last Literal Assigned at Level d
 def lastAssignedAtLevel(d, levels):
@@ -145,12 +146,34 @@ def lastAssignedAtLevel(d, levels):
 # Resolving means: (x1 | x2 | x3) (~x1 | ~x2 | x3) => x3 since x1 and ~x1 cancels each other out
 def resolve(first_cl, second_cl, value):
     new_clause = []
-    # for first_lit in first_cl:
-    #     for second_lit in second_cl:
-    #         if first_lit.name == second_lit.name:
-    #             new_clause.append(first_lit)
-    #         if first_lit.name != second_lit.name:
-    #             new_clause.append(first)
+    combined_clause = first_cl + second_cl
+    for (idx, lit) in enumerate(combined_clause):
+        for (idx2, lit2) in enumerate(combined_clause):
+            if idx == idx2: continue
+            if lit.name == lit2.name: 
+                new_clause.append(lit)
+                combined_clause.remove(lit)
+                combined_clause.remove(lit2)
+            elif "-" + lit.name == lit2.name:
+                combined_clause.remove(lit)
+                combined_clause.remove(lit2)
+            elif lit.name == "-" + lit2.name:
+                combined_clause.remove(lit)
+                combined_clause.remove(lit2)
+    return new_clause
+
+# If the clause is unary, then we return 0. Otherwise, we return the second hiest level
+def assertingLevel(clause):
+    if len(clause) - 1 == 1: return 0
+    else:
+        max_node = -1
+        for lit in clause:
+            max_node = max(max_node, lit.dl)
+        clause.remove(max_node)
+        second_max_node = -1
+        for lit in clause:
+            second_max_node = max(second_max_node, lit.dl)
+        return second_max_node.dl
 
 # Sole Lit At Level d is the only lit at level d
 def soleLitAtLevel(s, clause, dl):
@@ -170,7 +193,16 @@ def CDCL(formula):
         node = decide(formula)
         update_formula(node, formula)
         graph.add_node(node)
+        while unit_prop(formula, graph, level) == "CONFLICT":
+
     return True
+
+'''
+@ToDo:
+- Figuring out how to identify the conflict node
+- Adding pieces together for analyze conflict
+- Working on backtrack
+'''
     
 
 print(CDCL(formula))
